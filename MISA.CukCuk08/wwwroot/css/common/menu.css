@@ -1,0 +1,101 @@
+﻿
+.menu {
+    color: #ffffff;
+}
+
+    .menu .menu-item {
+        display: flex;
+        width: calc(100% - 18px);
+        height: 40px;
+        background-color: #0973b9;
+        align-items: center;
+        padding-left: 18px;
+        border-top: 1px solid #178ad6;
+        border-bottom: 1px solid #03578e;
+        cursor: pointer;
+    }
+
+        .menu .menu-item:hover {
+            background-color: #eb7728;
+        }
+
+    .menu .menu-item-icon {
+        width: 20px;
+        height: 20px;
+        background-image: url('/content/images/iconmenu.png');
+    }
+
+    .menu .menu-item-text {
+        margin-left: 10px;
+        line-height: 40px;
+    }
+
+    /*Icon position*/
+    .menu .icon-home {
+        background-position: -3px -5px;
+    }
+
+    .menu .icon-report {
+        background-position: -3px -194px;
+    }
+
+    .menu .icon-buy {
+        background-position: -3px -377px;
+    }
+
+    .menu .icon-store {
+        background-position: -3px -40px;
+    }
+
+    .menu .icon-money {
+        background-position: -3px -81px;
+    }
+
+    .menu .icon-saving {
+        background-image: url('../../content/images/icon-deposit.png');
+    }
+
+    .menu .icon-fee {
+        background-image: url('../../content/images/icon-cost.png');
+    }
+
+    .menu .icon-discount {
+        background-position: -3px -118px;
+    }
+
+    .menu .icon-report {
+        background-position: -3px -194px;
+    }
+
+    .menu .icon-menu {
+        background-image: url('../../content/images/vector-smart-object.png');
+    }
+
+    .menu .icon-directory {
+        background-position: -3px -157px;
+    }
+
+    .menu .icon-cancel {
+        background-image: url('../../content/images/cancel-invoice.png');
+    }
+
+    .menu .icon-setting {
+        background-position: -3px -234px;
+    }
+
+    .menu .icon-help {
+        background-position: -1px -1px;
+        background-image: url(../../content/images/iconhelp.png);
+    }
+
+    .menu .icon-subscription {
+        background-image: url('../../content/images/icon-subscriber.png');
+    }
+
+    .menu .icon-apps {
+        background-position: -3px -420px;
+    }
+
+    .menu .icon-5Food {
+        background-image: url('../../content/images/5food.png');
+    }

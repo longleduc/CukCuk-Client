@@ -1,0 +1,120 @@
+﻿
+button .btn-icon {
+    width: 16px;
+    height: 16px;
+    background-image: url('/content/images/iconsprite.png');
+    cursor: pointer;
+}
+
+    button .btn-icon.btn-icon-add {
+        background-position: -1px -2416px;
+    }
+
+    button .btn-icon.btn-icon-duplicate {
+        background-position: -1px -1888px;
+    }
+
+    button .btn-icon.btn-icon-edit {
+        background-position: 0 -1872px;
+    }
+
+    button .btn-icon.btn-icon-delete {
+        background-position: -1px -2048px;
+    }
+
+    button .btn-icon.btn-icon-refresh {
+        background-position: 0 -2586px;
+    }
+
+    button .btn-icon.btn-icon-import {
+        background-image: url('/content/images/import16.png');
+    }
+
+    button .btn-icon.btn-icon-export {
+        background-image: url('/content/images/excel_97_24.png');
+    }
+
+    button .btn-icon.btn-icon-group-customer {
+        background-image: url('/content/images/ic_gopkhachhang.png');
+        background-repeat: no-repeat;
+    }
+
+    button .btn-icon.btn-icon-help {
+        background-image: url('../../content/images/icons8-help-17.png');
+        background-repeat: no-repeat;
+        background-position: 0px -1px;
+    }
+
+.btn {
+    border: 1px solid #d9d9d9;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+    .btn:hover {
+        background-color: #c7d5d9;
+    }
+
+button .btn-text {
+    margin-left: 4px;
+}
+
+#btnImport {
+    border-left: 2px ridge;
+}
+
+#btnGroupCustomer {
+    border-left: 2px ridge;
+    border-right: 2px ridge;
+}
+
+.btnBackToDefault {
+    position: absolute;
+    top: 21px;
+    right: 110px;
+    padding: 4px 10px 4px 10px;
+    height: 28px;
+}
+
+
+.btnResponse {
+    position: absolute;
+    top: 21px;
+    right: 9px;
+    padding: 4px 10px 4px 30px;
+    background-image: url('../../content/images/viewemail.png');
+    background-repeat: no-repeat;
+    background-position: 10px 3px;
+    height: 28px;
+}
+
+
+
+#btnSave {
+    padding: 5px 15px 5px 35px;
+    background-image: url('../../content/images/save16.png');
+    background-repeat: no-repeat;
+    background-position: 14px 4px;
+}
+
+#btnSaveAdd {
+    padding: 5px 15px 5px 35px;
+    background-image: url('../../content/images/saveadd16.png');
+    background-repeat: no-repeat;
+    background-position: 14px 4px;
+    margin: 0px 5px 0px 5px;
+}
+
+#btnClose {
+    padding: 5px 15px 5px 35px;
+    background-image: url('../../content/images/disable16.png');
+    background-repeat: no-repeat;
+    background-position: 14px 4px;
+}
+
+#btnHelp {
+    padding: 5px 15px 5px 35px;
+    background-image: url('../../content/images/icons8-help-17.png');
+    background-repeat: no-repeat;
+    background-position: 15px 3px;
+}

@@ -1,0 +1,52 @@
+﻿.grid {
+    width: 100%;
+    height: 680px;
+    border: 1px solid #ccc;
+    border-top: none;
+    overflow-y: auto;
+}
+
+table {
+    border: none;
+    border-collapse: collapse;
+    border-color: #ccc;
+    height: calc(100% - 28px);
+}
+
+    table thead {
+        border-top: none;
+        background: #ededed;
+    }
+
+        table thead th {
+            font-weight: normal;
+            height: 30px;
+            width: 12.5%;
+            align-items: center;
+            text-align: center;
+        }
+
+    table tr td {
+        padding: 2px 4px;
+        border: 1px solid #ccc;
+        max-height: 23px;
+        height: 23px;
+        align-items: center;
+        max-width: 0px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    table tbody tr:hover {
+        background-color: #bfd1fe;
+        cursor : pointer;
+    }
+
+    table tbody tr.row-selected {
+        background-color: #a4befc;
+    }
+
+    .search-input {
+        width: 7rem;
+    }

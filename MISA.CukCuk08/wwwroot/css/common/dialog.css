@@ -1,0 +1,138 @@
+﻿.form-dialog {
+    position: absolute;
+}
+
+.dialog-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000000;
+    opacity: .4;
+}
+
+
+.dialog {
+    position: fixed;
+    width: 650px;
+    height: 420px   ;
+    background-color: #ffffff;
+    top: calc(50% - 200px);
+    left: calc(50% - 300px);
+    border-radius: 5px;
+    border: 5px solid #0072bc;
+}
+
+    .dialog .dialog-titlebar {
+        color: #ffffff;
+        width: 100%;
+        background-color: #0072bc;
+        height: 30px;
+    }
+
+        .dialog .dialog-titlebar .title {
+            float: left;
+            line-height: 25px;
+            padding-left: 4px;
+        }
+
+        .dialog .dialog-titlebar .btn-close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-image: url('../../content/images/close-icon.png');
+        }
+
+    .dialog .dialog-body {
+        width: 100%;
+        padding: 8px;
+    }
+
+.dialog-body label {
+    display: inline-block;
+    width: 125px;
+}
+.dialog-body .row{
+    margin: 7px;
+}
+
+
+.dialog .dialog-footer {
+    display: flex;
+    padding: 8px;
+    position: absolute;
+    bottom: 9px;
+    left: 0;
+    right: 0;
+    height: 20px;
+}
+
+.dialog .dialog-footer .footer-left{
+    position:absolute;
+    left:15px;
+}
+
+    .dialog .dialog-footer .footer-right {
+        position: absolute;
+        right: 9px;
+    }
+
+.small-input {
+    width: 170px;
+    height: 20px;
+}
+
+.large-input {
+    width: 492px;
+    height : 20px;
+}
+
+#txtNote {
+    height: 40px;
+}
+
+#dtBirthday {
+    width: 173px;
+    height: 25px;
+}
+
+#txtGroupCustomer {
+    background-image: url('../../content/images/icons8-plus-math-16.png');
+    background-repeat: no-repeat;
+    background-position: 155px 3px;
+}
+
+.row input {
+    border: 1px solid #d9d9d9;
+}
+
+    .row input:focus {
+        outline: none !important;
+        border: 1px solid #719ECE;
+        box-shadow: 0 0 10px #0072bc;
+    }
+
+.required-error{
+    border: 1px solid #ff0000 !important;
+}
+
+.two-in-a-line-input {
+    margin-right: 14px;
+}
+
+.avatar-picture {
+    position: absolute;
+    right: 13%;
+    top: 28%;
+}
+
+.ava-img {
+    width: 150px;
+    height: 140px;
+    border: 1px solid #808080;
+}

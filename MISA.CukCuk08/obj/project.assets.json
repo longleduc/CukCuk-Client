@@ -8851,11 +8851,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ldlong\\LongLD\\Cukcuk-Shop Client\\MISA.CukCuk08\\MISA.CukCuk08.csproj",
+      "projectUniqueName": "C:\\Users\\ldlong\\LongLD\\CukCuk-Client\\MISA.CukCuk08\\MISA.CukCuk08.csproj",
       "projectName": "MISA.CukCuk08",
-      "projectPath": "C:\\Users\\ldlong\\LongLD\\Cukcuk-Shop Client\\MISA.CukCuk08\\MISA.CukCuk08.csproj",
+      "projectPath": "C:\\Users\\ldlong\\LongLD\\CukCuk-Client\\MISA.CukCuk08\\MISA.CukCuk08.csproj",
       "packagesPath": "C:\\Users\\ldlong\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ldlong\\LongLD\\Cukcuk-Shop Client\\MISA.CukCuk08\\obj\\",
+      "outputPath": "C:\\Users\\ldlong\\LongLD\\CukCuk-Client\\MISA.CukCuk08\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ldlong\\AppData\\Roaming\\NuGet\\NuGet.Config",

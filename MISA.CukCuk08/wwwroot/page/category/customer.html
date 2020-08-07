@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Danh mục khách hàng</title>
+    <title>Danh mục Nhân viên</title>
     <link href="/css/common/main.css" rel="stylesheet" />
     <link href="/css/common/container.css" rel="stylesheet" />
     <link href="/css/common/header.css" rel="stylesheet" />
@@ -120,7 +120,7 @@
         <!--Content-->
         <div class="content">
             <div class="content-header">
-                <h1 style="margin-top: 5px">Danh mục <span style="color: #1b90e8; font-size:18px;">> Khách hàng</span></h1>
+                <h1 style="margin-top: 5px">Danh mục <span style="color: #1b90e8; font-size:18px;">> Nhân viên</span></h1>
                 <button class="btn btnBackToDefault">Quay lại thiết lập ban đầu</button>
                 <button class="btn btnResponse">Phản hồi</button>
             </div>
@@ -169,8 +169,8 @@
                     <table id="tbListCustomer" width="100%" border="1">
                         <thead>
                             <tr>
-                                <th>Mã khách hàng</th>
-                                <th>Tên khách hàng</th>
+                                <th>Mã Nhân viên</th>
+                                <th>Tên Nhân viên</th>
                                 <th>Tên công ty</th>
                                 <th>Ngày sinh</th>
                                 <th>Địa chỉ</th>
@@ -209,8 +209,8 @@
                     <div class="info-page">
                         <span>Trang </span>
                         <input id="page-number" type="number" name="number-of-page" value="1" min="1" />
-                        <span>trên <span class="total-page">1</span></span> 
-                        
+                        <span>trên <span class="total-page">1</span></span>
+
                     </div>
 
                     <div class="btn-break"></div>
@@ -251,59 +251,90 @@
         <div class="dialog-modal"></div>
         <div class="dialog">
             <div class="dialog-titlebar">
-                <div class="title">Khách hàng</div>
+                <div class="title">Thông tin Nhân viên</div>
                 <div id="btnCloseHeader" class="btn-close"></div>
             </div>
             <div class="dialog-body">
-                <div class="row row-customer-code">
-                    <label>Mã khách hàng <span style="color:red;">(*)</span></label>
-                    <input required class="small-input two-in-a-line-input" id="txtCustomerCode" type="text" />
-                    <label>Tên khách hàng <span style="color:red;">(*)</span></label>
-                    <input required class="small-input" id="txtCustomerName" type="text" />
+                <div class="general-info">
+                    <div class="row">
+                        <h4>Thông tin chung</h4>
+                    </div>
+                    <div class="row">
+                        <label>Mã Nhân Viên <span style="color:red;">(*)</span></label>
+                        <input required class="avg-input" id="txtStaffCode" type="text" />
+                    </div>
+                    <div class="row">
+                        <label>Tên Nhân viên <span style="color:red;">(*)</span></label>
+                        <input required class="avg-input" id="txtStaffName" type="text" />
+                    </div>
+                    <div class="row">
+                        <label>Ngày sinh</label>
+                        <input class="small-input" id="dtBirthday" type="date" />
+                        <label>Giới tính</label>
+                        <select class="small-input" id="slGender">
+                            <option>Nam</option>
+                            <option>Nữ</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <label>Email<span style="color:red;">(*)</span></label>
+                        <input required class="avg-input" id="txtEmail" type="text" />
+                    </div>
+                    <div class="row">
+                        <label>Số điện thoại <span style="color:red;">(*)</span></label>
+                        <input required class="avg-input" id="txtPhoneNumber" type="text" />
+                    </div>
+                    <div class="row">
+                        <label>Số CMT</label>
+                        <input class="small-input" id="txtIdNumber" type="text" style="height:22px;" />
+                        <label>Ngày cấp</label>
+                        <input class="small-input" id="dtGivenDate" type="date" />
+                    </div>
+                    <!--<div class="avatar-picture">
+                        <img class="ava-img" src="/content/images/Gau.gif" alt="Avatar picture" />
+                    </div>-->
+                    <div class="row">
+                        <label>Nơi cấp</label>
+                        <input class="large-input" id="txtGivenPlace" type="text" />
+                    </div>
                 </div>
-                <div class="row row-member-code">
-                    <label>Mã Thẻ Thành Viên</label>
-                    <input class="small-input" id="txtMemberCode" type="text" />
-                    <label style="margin-left: 15px; margin-right: 4px;">Avatar khách hàng</label>
-                    <input class="small-input" id="fileImg" type="file" />
+                <div class="work-info">
+                    <div class="row">
+                        <h4>Thông tin công việc</h4>
+                    </div>
+                    <div class="row">
+                        <label>Vị trí</label>
+                        <select class="large-select" id="txtPosition">
+                            <option>Giám đốc</option>
+                            <option>Nhân viên</option>
+                            <option>Fresher</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <label>Phòng ban</label>
+                        <select class="large-select" id="slDepartment">
+                            <option>Phòng đào tạo</option>
+                            <option>Phòng nghiên cứu công nghệ</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <label>Mã số thuế</label>
+                        <input class="small-input" id="txtDebitNumber" type="text" />
+                        <label>Mức lương</label>
+                        <input class="avg-input" id="txtSalary" type="text" />
+                    </div>
+                    <div class="row">
+                        <label>Ngày gia nhập</label>
+                        <input class="small-select" id="dtStartDate" type="date" />
+                        <label>Tình trạng</label>
+                        <select class="avg-select" id="slStatus">
+                            <option>Đang làm việc</option>
+                            <option>Đã nghỉ việc</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="row">
-                    <label>Nhóm khách hàng</label>
-                    <input class="small-input" id="txtGroupCustomer" type="text" />
-                </div>
-                <div class="row">
-                    <label>Số điện thoại <span style="color:red;">(*)</span></label>
-                    <input required class="small-input" id="txtPhoneNumber" type="text" />
-                </div>
-                <div class="row">
-                    <label>Ngày sinh</label>
-                    <input class="small-input two-in-a-line-input" id="dtBirthday" type="date" />
-                </div>
-                <div class="row">
-                    <label>Tên công ty</label>
-                    <input class="small-input" id="txtCompanyName" type="text" />
-                </div>
-                <div class="row">
-                    <label>Mã số thuế</label>
-                    <input class="small-input two-in-a-line-input" id="txtDebitNumber" type="text" />
-                </div>
-                <div class="row">
-                    <label>Email</label>
-                    <input class="small-input" id="txtEmail" type="text" />
-                    <label style="margin-right: 155px; margin-left: 15px">Là thành viên 5 Food</label>
-                    <input id="ckIs5FoodMember" type="checkbox" />
-                </div>
-                <div class="row">
-                    <label>Địa chỉ</label>
-                    <input class="large-input" id="txtAddress" type="text" />
-                </div>
-                <div class="row">
-                    <label>Ghi chú</label>
-                    <input class="large-input" id="txtNote" type="text" />
-                </div>
-                <div class="avatar-picture">
-                    <img class="ava-img" src="/content/images/Gau.gif" alt="Avatar picture" />
-                </div>
+
+
             </div>
             <div class="dialog-footer">
                 <div class="footer-right">

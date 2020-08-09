@@ -16,7 +16,7 @@
 .dialog {
     position: fixed;
     width: 650px;
-    height: 600px   ;
+    height: 500px   ;
     background-color: #ffffff;
     top: calc(50% - 290px);
     left: calc(50% - 300px);
@@ -73,12 +73,12 @@
 
 .dialog .dialog-footer .footer-left{
     position:absolute;
-    left:15px;
+    left: 5px;
 }
 
     .dialog .dialog-footer .footer-right {
         position: absolute;
-        right: 9px;
+        right: 13px;
     }
 
 .small-input {
@@ -100,16 +100,16 @@
 .avg-select {
     width: 308px;
     height: 25px;
-    margin-left: -65px;
+    margin-left: -62px;
 }
 
 .large-input {
-    width: 492px;
+    width: 497px;
     height: 20px;
 }
 
 .large-select {
-    width: 501px;
+    width: 503px;
     height: 25px;
 }
 
@@ -126,10 +126,12 @@
     margin-left: -65px;
     border: 1px solid #d9d9d9;
     width: 129px;
+    height: 25px;
 }
 
 #dtGivenDate {
     margin-left: -65px;
+    height: 25px;
 }
 
 #txtDebitNumber {
@@ -138,7 +140,7 @@
 
 #txtSalary {
     width: 301px;
-    margin-left: -65px;
+    margin-left: -63px;
 }
 
 .row input {

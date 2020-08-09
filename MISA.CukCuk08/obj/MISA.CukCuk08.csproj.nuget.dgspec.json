@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ldlong\\LongLD\\CukCuk-Client\\MISA.CukCuk08\\MISA.CukCuk08.csproj": {}
+    "D:\\Long\\CukCuk-Client\\MISA.CukCuk08\\MISA.CukCuk08.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ldlong\\LongLD\\CukCuk-Client\\MISA.CukCuk08\\MISA.CukCuk08.csproj": {
+    "D:\\Long\\CukCuk-Client\\MISA.CukCuk08\\MISA.CukCuk08.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ldlong\\LongLD\\CukCuk-Client\\MISA.CukCuk08\\MISA.CukCuk08.csproj",
+        "projectUniqueName": "D:\\Long\\CukCuk-Client\\MISA.CukCuk08\\MISA.CukCuk08.csproj",
         "projectName": "MISA.CukCuk08",
-        "projectPath": "C:\\Users\\ldlong\\LongLD\\CukCuk-Client\\MISA.CukCuk08\\MISA.CukCuk08.csproj",
-        "packagesPath": "C:\\Users\\ldlong\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ldlong\\LongLD\\CukCuk-Client\\MISA.CukCuk08\\obj\\",
+        "projectPath": "D:\\Long\\CukCuk-Client\\MISA.CukCuk08\\MISA.CukCuk08.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\Long\\CukCuk-Client\\MISA.CukCuk08\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ldlong\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -93,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

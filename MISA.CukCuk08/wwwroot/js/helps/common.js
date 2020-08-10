@@ -60,5 +60,22 @@ var commonJS = {
             tmp = '0' + tmp;
         }
         return "NV" + tmp;
+    },
+    /**
+     * Hàm trả về tiền dưới dạng string để gửi dữ liệu DB
+     * @param {any} money
+     */
+    formatMoneyToBind(money) {
+        return money.replace(/[.]/g, "");
+    },
+
+    /**
+     * Hàm trả về link ảnh có thể bind được để hiển thị
+     * @param {any} imageLink
+     */
+    formatImageLink(imageLink) {
+        var startLink = imageLink.indexOf("\\content");
+        imageLink = imageLink.replace(/[\\]/g, "/");
+        return imageLink.substr(startLink, imageLink.length - 1);
     }
 }

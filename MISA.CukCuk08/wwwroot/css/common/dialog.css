@@ -165,16 +165,9 @@
     margin-right: 14px;
 }
 
-.avatar-picture {
-    position: absolute;
-    right: 13%;
-    top: 28%;
-}
-
-.ava-img {
-    width: 150px;
-    height: 140px;
-    border: 1px solid #808080;
+.img-note {
+    text-align: center;
+    margin-top: 3%;
 }
 
 .general-info h4 {
@@ -185,4 +178,67 @@
 .work-info h4 {
     margin-top: 12px;
     border-bottom: 1px solid #d9d9d9;
+}
+
+.dialog .upload-control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 142px;
+    height: 40px;
+    bottom: 315px;
+    right: 19px;
+}
+
+    .dialog .upload-control button, .choose-file {
+        display: flex;
+        align-items: center;
+        height: 50%;
+        width: 35px;
+        border: 1px solid #ccc;
+        outline: none;
+        font-size: 20px;
+        border-radius: unset;
+    }
+
+        .dialog .upload-control button:hover, .choose-file:hover {
+            background-color: white;
+            border-color: #0973B9;
+            cursor: pointer;
+        }
+
+.upload-control .choose-file {
+    width: 24px;
+    height: 8px;
+    background-color: #efefef;
+    padding-bottom: 10px;
+    padding-left: 8px;
+    position: absolute;
+    top: 95%;
+    right: 55%;
+}
+
+.upload-control button.delete-avatar {
+    color: red;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-top: 2px;
+    position: absolute;
+    top: 95%;
+    right: 23%;
+}
+
+.image-info {
+    position: absolute;
+    top: 43%;
+    right: 5%;
+}
+
+.avatar-upload img {
+    position: absolute;
+    top: 13%;
+    right: 3%;
+    width: 150px;
+    height: 150px;
 }

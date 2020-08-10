@@ -295,9 +295,19 @@
                         <label>Ngày cấp</label>
                         <input class="small-input" id="dtGivenDate" type="date" />
                     </div>
-                    <!--<div class="avatar-picture">
-                        <img class="ava-img" src="/content/images/Gau.gif" alt="Avatar picture" />
-                    </div>-->
+                    <div class="form-upload-image">
+                        <div class="avatar-upload">
+                            <img class="ava-img" src="/content/images/avatardefault.png" />
+                            <div class="upload-control">
+                                <label for="fileUpload"><span class="choose-file mr-8p">...</span></label>
+                                <button class="delete-avatar">&times;</button>
+                                <input type="file" id="fileUpload" style="display:none" />
+                            </div>
+                        </div>
+                        <div class="image-info">
+                            Chỉ được upload tệp<br /><strong>.jpg .jpeg .png .gif</strong>
+                        </div>
+                    </div>
                     <div class="row">
                         <label>Nơi cấp</label>
                         <input class="large-input" id="txtGivenPlace" type="text" />
@@ -369,7 +379,7 @@
                 <div class="content-warning">
                     <div class="icon">
                     </div>
-                    <h2 class="content">Bạn có chắc chắn muốn xóa <span id="staff-name"></span> ?</h2>
+                    <h2 class="content">Bạn có chắc chắn muốn xóa ?</h2>
                 </div>
                 <div class="button-group">
                     <button id="btn-yes-warning">Có</button>
@@ -381,6 +391,6 @@
     <script src="/js/lib/jquery-3.5.1.min.js"></script>
     <script src="/js/helps/resource.js"></script>
     <script src="/js/helps/common.js"></script>
-    <script src="/js/page/customer.js"></script>
+    <script src="/js/page/staff.js"></script>
 </body>
 </html>

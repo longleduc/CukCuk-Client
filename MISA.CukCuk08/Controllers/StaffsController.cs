@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -196,11 +197,35 @@ namespace MISA.CukCuk08.Controllers
         [HttpPost]
         public async Task<ActionResult<Staff>> PostStaff([FromBody]Staff staff)
         {
+            Staff existStaff = _context.Staff.Where(s => s.StaffCode == staff.StaffCode).FirstOrDefault();
+            if (existStaff != null)
+            {
+                return Ok( new { Result= "Fail", existStaff } );
+            }
             staff.StaffId = Guid.NewGuid();
             _context.Staff.Add(staff);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetStaff", new { id = staff.StaffId }, staff);
+            return Ok( new { Result= "Success", staff } );
+            //return CreatedAtAction("GetStaff", new { id = staff.StaffId }, staff);
+        }
+
+       
+
+        // POST: api/Customers
+        [HttpPost("uploadimg")]
+        public async Task<ActionResult<String>> PostFile(IFormFile formFile)
+        {
+            // Create Path to save file
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\content\\images\\uploaded", formFile.FileName);
+
+            // Create a new local file and copy content of uploaded file
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await formFile.CopyToAsync(stream);
+            }
+
+            return filePath;
         }
 
         // DELETE: api/Staffs/5

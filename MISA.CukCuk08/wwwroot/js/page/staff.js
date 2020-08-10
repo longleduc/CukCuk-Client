@@ -1,13 +1,13 @@
 ﻿
 $(document).ready(function () {
     //load dữ liệu:
-    customerJs = new CustomerJS();
+    staffJs = new StaffJS();
 })
 
 /**
  * Object JS quản lý các sự kiện cho trang danh mục khách hàng.
  * */
-class CustomerJS {
+class StaffJS {
     constructor() {
         var me = this;
         me.loadData();
@@ -30,7 +30,7 @@ class CustomerJS {
         $("#btnCloseHeader").on("click", 0, this.btnCloseHeaderOnClick.bind(this));
 
         //Khi ấn nút cất
-        $("#btnSave").click(this.saveData.bind(this));
+        $("#btnSave").click(this.saveFile.bind(this));
 
         //Khi ấn nút cất và thêm
         $("#btnSaveAdd").click(this.saveAndAddData.bind(this));
@@ -64,7 +64,10 @@ class CustomerJS {
         $('#btn-close-warning').on('click', 0, this.NotDeleteStaff);
 
         // Khi uploaded ảnh
-        //$('#fileImg').on('change', this.showImageFromInput);
+        $('#fileUpload').on('change', this.showImageFromInput);
+
+        // Khi xóa ảnh
+        $('.delete-avatar').on('click', this.DeleteImage);
     }
 
     /**
@@ -117,9 +120,12 @@ class CustomerJS {
                     $('#slPosition').val(res['Position']);
                     $('#slDepartment').val(res['Department']);
                     $('#txtDebitNumber').val(res['DebitNumber']);
-                    $('#txtSalary').val(res['Salary']);
+                    $('#txtSalary').val(commonJS.formatMoney(res['Salary']));
                     $('#dtStartDate').val(commonJS.formatDateToBind(new Date(res['StartDate'])));
                     $('#slStatus').val(res['Status']);
+                    var imageUrl = commonJS.formatImageLink(res['ImageLink']);
+                    $(".ava-img").attr("src", imageUrl);
+                    $(".ava-img").css("visibility", "visible");
                 }).fail(function () {
                     alert("Lỗi");
                 });
@@ -148,8 +154,8 @@ class CustomerJS {
             action = sender.data;
             // Nếu tìm thấy row có class là row-selected
             if ($('.row-selected').length !== 0) {
-                // Gán tên nhân viên vào warning-box
-                $('#staff-name').html($('.row-selected').find('td:eq(1)').text());
+                //// Gán tên nhân viên vào warning-box
+                //$('#staff-name').html($('.row-selected').find('td:eq(1)').text());
 
                 // Show ra warning-box
                 $('#warning-box').show();
@@ -161,7 +167,7 @@ class CustomerJS {
 
     DeleteStaff(sender) {
         try {
-            var customerJS = this;
+            var staffJS = this;
 
             // Đóng cửa số warning-box
             $('#warning-box').hide();
@@ -185,7 +191,7 @@ class CustomerJS {
                     alert(Resource.Language[commonJS.LanguageCode].Delete);
 
                     // Load lại dữ liệu ra trang để render
-                    customerJS.loadData();
+                    staffJS.loadData();
                 }).fail(function () {
                     alert("Lỗi");
                 })
@@ -197,7 +203,7 @@ class CustomerJS {
             $("#frmDialogDetail").hide();
 
             // Reset lại dialog
-            customerJS.resetDialog();
+            staffJS.resetDialog();
         } catch (e) {
             console.log(e);
         }
@@ -375,9 +381,8 @@ class CustomerJS {
      * Cất dữ liệu
      * CreatedBy: LDONG (24/07/2020)
      * */
-    saveData() {
+    saveData(staffJS, imageLink) {
         try {
-            var customerJS = this;
             //Khởi tạo các biến để lấy data
             var staffId = null,
                 staffCode = "",
@@ -412,11 +417,11 @@ class CustomerJS {
             position = $("#slPosition").val();
             department = $("#slDepartment").val();
             debitNumber = $("#txtDebitNumber").val();
-            salary = parseInt($("#txtSalary").val());
+            salary = parseInt(commonJS.formatMoneyToBind($("#txtSalary").val()));
             startDate = new Date($("#dtStartDate").val()) || null;
             status = $("#slStatus").val();
 
-            // Từ các dữ liệu thu thập được thì build thành object khách hàng (customer)
+            // Từ các dữ liệu thu thập được thì build thành object khách hàng (staff)
             var staff = {
                 StaffId: staffId,
                 StaffCode: staffCode,
@@ -433,11 +438,12 @@ class CustomerJS {
                 DebitNumber: debitNumber,
                 Salary: salary,
                 StartDate: startDate,
-                Status: status
+                Status: status,
+                ImageLink: imageLink
             };
 
             // Kiểm tra validate
-            if (customerJS.validateDialog(staff)) {
+            if (staffJS.validateDialog(staff)) {
                 // Nếu hành động đang là THÊM
                 if (action == Enum.FormMode.Add) {
                     $.ajax({
@@ -447,14 +453,16 @@ class CustomerJS {
                         dataType: "text",
                         contentType: "application/json"
                     }).done(function (res) {
-                        // Cho hiển thị ảnh
-                        //$("img").attr("src", imageLink);
+                        res = JSON.parse(res);
+                        if (res.Result == "Fail") {
+                            alert("Mã nhân viên trùng với mã nhân viên " + res.existStaff.StaffName);
+                        } else {
+                            // Hiện thị thông báo thêm thành công
+                            alert(Resource.Language[commonJS.LanguageCode].AddNew);
 
-                        // Hiện thị thông báo thêm thành công
-                        alert(Resource.Language[commonJS.LanguageCode].AddNew);
-
-                        // Load lại dữ liệu ra trang để render
-                        customerJS.loadData();
+                            // Load lại dữ liệu ra trang để render
+                            staffJS.loadData();
+                        }
                     }).fail(function (res) {
                         alert("Lỗi AddNew");
                     })
@@ -472,7 +480,7 @@ class CustomerJS {
                         alert(Resource.Language[commonJS.LanguageCode].Edit);
 
                         // Load lại dữ liệu ra trang để render
-                        customerJS.loadData();
+                        staffJS.loadData();
                     }).fail(function () {
                         alert("Lỗi");
                     })
@@ -489,7 +497,7 @@ class CustomerJS {
                         alert(Resource.Language[commonJS.LanguageCode].Duplicate);
 
                         // Load lại dữ liệu ra trang để render
-                        customerJS.loadData();
+                        staffJS.loadData();
                     }).fail(function () {
                         alert("Lỗi Duplicate");
                     })
@@ -499,7 +507,7 @@ class CustomerJS {
                 $("#frmDialogDetail").hide();
 
                 // Reset lại dialog
-                customerJS.resetDialog();
+                staffJS.resetDialog();
             }
         } catch (e) {
             console.log(e);
@@ -511,7 +519,7 @@ class CustomerJS {
      * CreatedBy: LDLONG (3/8/2020)
      * */
     saveAndAddData() {
-        this.saveData();
+        this.saveFile();
         $("#frmDialogDetail").show();
     }
 
@@ -540,6 +548,10 @@ class CustomerJS {
             $('#txtSalary').val("");
             $('#dtStartDate').val("");
             $('#slStatus').val("");
+            var imageUrl = "/content/images/avatardefault.png";
+            $(".ava-img").attr("src", imageUrl);
+            $(".ava-img").css("visibility", "visible");
+            $("#fileUpload").val("");
         } catch (e) {
             console.log(e);
         }
@@ -571,7 +583,7 @@ class CustomerJS {
     /**
      * Kiểm tra Mã khách hàng, Tên, Số điện thoại có trống hay không
      * và kiểm tra xem nếu có email thì đã đúng định dạng chưa
-     * @param {any} customer
+     * @param {any} staff
      * CreatedBy: LDLONG (28/7/2020)
      */
     validateDialog(staff) {
@@ -739,9 +751,9 @@ class CustomerJS {
      * */
     saveFile() {
         try {
-            var customerJS = this;
+            var staffJS = this;
             // Lấy ra object chứa file ảnh
-            var image = $("#fileImg").get(0).files;
+            var image = $("#fileUpload").get(0).files;
             if (image.length > 0) {
                 // Khởi tạo formData để chứa ảnh
                 var formData = new FormData();
@@ -751,20 +763,20 @@ class CustomerJS {
 
                 // Call API POST để gửi ảnh về DB
                 $.ajax({
-                    url: '/api/Customers/uploadimg',
+                    url: '/api/v1/staffs/uploadimg',
                     type: 'POST',
                     data: formData,
                     processData: false,
                     contentType: false,
-                }).done(function (res) {
-                    // Gửi dữ liệu customer sau khi có link ảnh về DB
-                    customerJS.saveData(customerJS, res);
+                }).done(function (imageLink) {
+                    // Gửi dữ liệu staff sau khi có link ảnh về DB
+                    staffJS.saveData(staffJS, imageLink);
                 }).fail(function () {
                     alert("Lỗi saveFile");
                 });
             } else {
-                // Gửi dữ liệu customer sau khi có link ảnh về DB
-                customerJS.saveData(customerJS, null);
+                // Gửi dữ liệu staff sau khi có link ảnh về DB
+                staffJS.saveData(staffJS, null);
             }
         } catch (e) {
             console.log(e);
@@ -782,9 +794,18 @@ class CustomerJS {
             var imageUrl = event.target.result;
             $(".ava-img").attr("src", imageUrl);
             $(".ava-img").css("visibility", "visible");
-            //$("#img-info").html(file.name);
         };
         fileReader.readAsDataURL(file);
+    }
+
+    /**
+     * Sự kiện khi xóa ảnh
+     * CreatedBy: LDLONG (10/08/2020)
+     * */
+    DeleteImage() {
+        var imageUrl = "/content/images/avatardefault.png";
+        $(".ava-img").attr("src", imageUrl);
+        $(".ava-img").css("visibility", "visible");
     }
 }
 

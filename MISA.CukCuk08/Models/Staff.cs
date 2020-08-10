@@ -21,5 +21,6 @@ namespace MISA.CukCuk08.Models
         public int? Salary { get; set; }
         public DateTime? StartDate { get; set; }
         public string Status { get; set; }
+        public string ImageLink { get; set; }
     }
 }

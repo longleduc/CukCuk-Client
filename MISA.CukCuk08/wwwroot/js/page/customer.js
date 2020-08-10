@@ -30,7 +30,7 @@ class CustomerJS {
         $("#btnCloseHeader").on("click", 0, this.btnCloseHeaderOnClick.bind(this));
 
         //Khi ấn nút cất
-        $("#btnSave").click(this.saveFile.bind(this));
+        $("#btnSave").click(this.saveData.bind(this));
 
         //Khi ấn nút cất và thêm
         $("#btnSaveAdd").click(this.saveAndAddData.bind(this));
@@ -58,7 +58,7 @@ class CustomerJS {
         $('.btnReload').on('click', this.btnFirstPageOnClick.bind(this));
 
         // Khi uploaded ảnh
-        $('#fileImg').on('change', this.showImageFromInput);
+        //$('#fileImg').on('change', this.showImageFromInput);
     }
 
     /**
@@ -72,7 +72,7 @@ class CustomerJS {
         //Show dialog
         $("#frmDialogDetail").show();
         // Focus vào ô input đầu tiên của dialog
-        $('#txtCustomerCode').focus();
+        $('#txtStaffCode').focus();
     }
 
     /**
@@ -87,27 +87,31 @@ class CustomerJS {
             //Nếu tìm thấy row có class là row-selected
             if ($('.row-selected').length !== 0) {
                 // Lấy ra ID của hàng đang được chọn
-                var customerId = $('.row-selected').data('id');
+                var staffId = $('.row-selected').data('id');
                 // Call API GET để lấy ra data với ID ở trên
                 $.ajax({
-                    url: "/api/Customers/" + customerId,
+                    url: "/api/v1/Staffs/" + staffId,
                     method: "GET",
                     data: {},
                     dataType: "json",
                     contentType: "application/json",
                 }).done(function (res) {
                     // Gán data lấy ra vào dialog
-                    $('#txtCustomerCode').val(res['CustomerCode']);
-                    $('#txtCustomerName').val(res['CustomerName']);
-                    $('#txtMemberCode').val(res['MemberCode']);
-                    $('#txtGroupCustomer').val(res['GroupCustomer']);
-                    $('#txtCompanyName').val(res['CompanyName']);
+                    $('#txtStaffCode').val(res['StaffCode']);
+                    $('#txtStaffName').val(res['StaffName']);
                     $('#dtBirthday').val(commonJS.formatDateToBind(new Date(res['Birthday'])));
-                    $('#txtAddress').val(res['Address']);
-                    $('#txtPhoneNumber').val(res['PhoneNumber']);
-                    $('#txtDebitNumber').val(res['DebitNumber']);
+                    $('#slGender').val(res['Gender']);
                     $('#txtEmail').val(res['Email']);
-                    $('#ckIs5FoodMember').prop('checked', res['Is5FoodMember']);
+                    $('#txtPhoneNumber').val(res['PhoneNumber']);
+                    $('#txtIdCard').val(res['IdCard']);
+                    $('#dtGivenDate').val(commonJS.formatDateToBind(new Date(res['GivenDate'])));
+                    $('#txtGivenPlace').val(res['GivenPlace']);
+                    $('#slPosition').val(res['Position']);
+                    $('#slDepartment').val(res['Department']);
+                    $('#txtDebitNumber').val(res['DebitNumber']);
+                    $('#txtSalary').val(res['Salary']);
+                    $('#dtStartDate').val(commonJS.formatDateToBind(new Date(res['StartDate'])));
+                    $('#slStatus').val(res['Status']);
                 }).fail(function () {
                     alert("Lỗi");
                 });
@@ -116,7 +120,7 @@ class CustomerJS {
                 $('#frmDialogDetail').show();
 
                 // Focus vào ô input đầu tiên của dialog
-                $('#txtCustomerCode').focus();
+                $('#txtStaffCode').focus();
             } else {
                 alert(Resource.Language[commonJS.LanguageCode].CantEdit);
             }
@@ -138,16 +142,16 @@ class CustomerJS {
             // Nếu tìm thấy row có class là row-selected
             if ($('.row-selected').length !== 0) {
                 // Lấy ra ID của hàng đang được chọn
-                var customerId = $('.row-selected').data('id')
+                var staffId = $('.row-selected').data('id')
 
                 // Call API DELETE với ID ở trên
                 $.ajax({
-                    url: "/api/Customers/" + customerId,
+                    url: "/api/v1/Staffs/" + staffId,
                     method: "DELETE",
                     data: {},
                     dataType: "text",
                     contentType: "application/json"
-                }).done(function (res) {
+                }).done(function () {
                     // Hiện thị thông báo thêm thành công
                     alert(Resource.Language[commonJS.LanguageCode].Delete);
 
@@ -177,26 +181,30 @@ class CustomerJS {
             //Nếu tìm thấy row có class là row-selected
             if ($('.row-selected').length !== 0) {
                 // Lấy ra ID của hàng đang được chọn
-                var customerId = $('.row-selected').data('id');
+                var staffId = $('.row-selected').data('id');
                 // Call API GET để lấy ra data với ID ở trên
                 $.ajax({
-                    url: "/api/Customers/" + customerId,
+                    url: "/api/v1/Staffs/" + staffId,
                     method: "GET",
                     data: {},
                     dataType: "json",
                     contentType: "application/json",
                 }).done(function (res) {
                     // Gán data lấy ra vào dialog
-                    $('#txtCustomerName').val(res['CustomerName']);
-                    $('#txtMemberCode').val(res['MemberCode']);
-                    $('#txtGroupCustomer').val(res['GroupCustomer']);
-                    $('#txtCompanyName').val(res['CompanyName']);
+                    $('#txtStaffName').val(res['StaffName']);
                     $('#dtBirthday').val(commonJS.formatDateToBind(new Date(res['Birthday'])));
-                    $('#txtAddress').val(res['Address']);
-                    $('#txtPhoneNumber').val(res['PhoneNumber']);
-                    $('#txtDebitNumber').val(res['DebitNumber']);
+                    $('#slGender').val(res['Gender']);
                     $('#txtEmail').val(res['Email']);
-                    $('#ckIs5FoodMember').prop('checked', res['Is5FoodMember']);
+                    $('#txtPhoneNumber').val(res['PhoneNumber']);
+                    $('#txtIdCard').val(res['IdCard']);
+                    $('#dtGivenDate').val(commonJS.formatDateToBind(new Date(res['GivenDate'])));
+                    $('#txtGivenPlace').val(res['GivenPlace']);
+                    $('#slPosition').val(res['Position']);
+                    $('#slDepartment').val(res['Department']);
+                    $('#txtDebitNumber').val(res['DebitNumber']);
+                    $('#txtSalary').val(res['Salary']);
+                    $('#dtStartDate').val(commonJS.formatDateToBind(new Date(res['StartDate'])));
+                    $('#slStatus').val(res['Status']);
                 }).fail(function () {
                     alert("Lỗi");
                 });
@@ -205,7 +213,7 @@ class CustomerJS {
                 $('#frmDialogDetail').show();
 
                 // Focus vào ô input đầu tiên của dialog
-                $('#txtCustomerCode').focus();
+                $('#txtStaffCode').focus();
             } else {
                 alert(Resource.Language[commonJS.LanguageCode].CantDuplicate);
             }
@@ -260,7 +268,7 @@ class CustomerJS {
 
             // Call API GET để lấy toàn bộ data về render vào table
             $.ajax({
-                url: "/api/Customers",
+                url: "/api/v1/Staffs",
                 method: "GET",
                 data: {},
                 dataType: "json",
@@ -291,47 +299,23 @@ class CustomerJS {
                         if (i < allRow && i < res.length) {
                             var item = res[i];
                             var customerInfoHTML = $(`<tr>
-                                <td>`+ item['CustomerCode'] + `</td>
-                                <td>`+ item['CustomerName'] + `</td>
-                                <td>`+ item['CompanyName'] + `</td>
+                                <td>`+ item['StaffCode'] + `</td>
+                                <td>`+ item['StaffName'] + `</td>
+                                <td>`+ item['Gender'] + `</td>
                                 <td>`+ commonJS.formatDate(new Date(item['Birthday'])) + `</td>
-                                <td>`+ item['Address'] + `</td>
                                 <td>`+ item['PhoneNumber'] + `</td>
                                 <td>`+ item['Email'] + `</td>
-                                <td class="align-center">`+ commonJS.buildCheckBoxByValue(item['Is5FoodMember']) + `</td>
+                                <td>`+ item['Position'] + `</td>
+                                <td>`+ item['Department'] + `</td>
+                                <td>`+ commonJS.formatMoney(item['Salary']) + `</td>
+                                <td>`+ item['Status'] + `</td>
                             </tr>`);
 
                             // Ko để hiện ID ra cho người dùng => Ẩn dưới dạng data của row đó
-                            customerInfoHTML.data("id", item["CustomerId"]);
-                            customerInfoHTML.data("memberCode", item["MemberCode"]);
-                            customerInfoHTML.data("groupCustomer", item["GroupCustomer"]);
-                            customerInfoHTML.data("debitNumber", item["DebitNumber"]);
-                            customerInfoHTML.data("imageLink", item["ImageLink"]);
+                            customerInfoHTML.data("id", item["StaffId"]);
                             // Render data vào table để render
                             $('table#tbListCustomer tbody').append(customerInfoHTML);
                         }
-
-                    // Gán dữ liệu vào 1 biến để render
-                    //$.each(res, function (index, item) {
-                    //    var customerInfoHTML = $(`<tr>
-                    //            <td>`+ item['CustomerCode'] + `</td>
-                    //            <td>`+ item['CustomerName'] + `</td>
-                    //            <td>`+ item['CompanyName'] + `</td>
-                    //            <td>`+ commonJS.formatDate(new Date(item['Birthday'])) + `</td>
-                    //            <td>`+ item['Address'] + `</td>
-                    //            <td>`+ item['PhoneNumber'] + `</td>
-                    //            <td>`+ item['Email'] + `</td>
-                    //            <td class="align-center">`+ commonJS.buildCheckBoxByValue(item['Is5FoodMember']) + `</td>
-                    //        </tr>`);
-
-                    //    // Ko để hiện ID ra cho người dùng => Ẩn dưới dạng data của row đó
-                    //    customerInfoHTML.data("id", item["CustomerId"]);
-                    //    customerInfoHTML.data("memberCode", item["MemberCode"]);
-                    //    customerInfoHTML.data("groupCustomer", item["GroupCustomer"]);
-                    //    customerInfoHTML.data("debitNumber", item["DebitNumber"]);
-                    //    // Render data vào table để render
-                    //    $('table#tbListCustomer tbody').append(customerInfoHTML);
-                    //})
                 }
             }).fail(function () {
                 alert("Lỗi");
@@ -345,87 +329,96 @@ class CustomerJS {
      * Cất dữ liệu
      * CreatedBy: LDONG (24/07/2020)
      * */
-    saveData(customerJS, imageLink) {
+    saveData() {
         try {
+            var customerJS = this;
             //Khởi tạo các biến để lấy data
-            var customerId = null,
-                customerCode = "",
-                customerName = "",
-                memberCode = "",
-                groupCustomer = "",
-                companyName = "",
+            var staffId = null,
+                staffCode = "",
+                staffName = "",
                 birthday = "",
-                address = "",
-                phoneNumber = "",
-                debitNumber = "",
+                gender = "",
                 email = "",
-                is5FoodMember;
+                phoneNumber = "",
+                idCard = "",
+                givenDate = "",
+                givenPlace = "",
+                position = "",
+                department = "",
+                debitNumber = "",
+                salary = 0,
+                startDate = "",
+                status = "";
 
             // Lấy dữ liệu được nhập từ các input:
             if ($('.row-selected').length !== 0 && action == Enum.FormMode.Edit) {
-                customerId = $('.row-selected').data('id');
+                staffId = $('.row-selected').data('id');
             }
-            customerCode = $("#txtCustomerCode").val();
-            customerName = $("#txtCustomerName").val();
-            memberCode = $("#txtMemberCode").val();
-            groupCustomer = $("#txtGroupCustomer").val();
-            companyName = $("#txtCompanyName").val();
+            staffCode = $("#txtStaffCode").val();
+            staffName = $("#txtStaffName").val();
             birthday = new Date($("#dtBirthday").val()) || null;
-            address = $("#txtAddress").val();
-            phoneNumber = $("#txtPhoneNumber").val();
-            debitNumber = $("#txtDebitNumber").val();
+            gender = $("#slGender").val();
             email = $("#txtEmail").val();
-            is5FoodMember = $("#ckIs5FoodMember").is(":checked");
+            phoneNumber = $("#txtPhoneNumber").val();
+            idCard = $("#txtIdCard").val();
+            givenDate = new Date($("#dtGivenDate").val()) || null;
+            givenPlace = $("#txtGivenPlace").val();
+            position = $("#slPosition").val();
+            department = $("#slDepartment").val();
+            debitNumber = $("#txtDebitNumber").val();
+            salary = parseInt($("#txtSalary").val());
+            startDate = new Date($("#dtStartDate").val()) || null;
+            status = $("#slStatus").val();
 
             // Từ các dữ liệu thu thập được thì build thành object khách hàng (customer)
-            var customer = {
-                CustomerId: customerId,
-                CustomerCode: customerCode,
-                CustomerName: customerName,
-                MemberCode: memberCode,
-                GroupCustomer: groupCustomer,
-                CompanyName: companyName,
+            var staff = {
+                StaffId: staffId,
+                StaffCode: staffCode,
+                StaffName: staffName,
                 Birthday: birthday,
-                Address: address,
-                PhoneNumber: phoneNumber,
-                DebitNumber: debitNumber,
+                Gender: gender,
                 Email: email,
-                Is5FoodMember: is5FoodMember,
-                ImageLink: imageLink
+                PhoneNumber: phoneNumber,
+                IdCard: idCard,
+                GivenDate: givenDate,
+                GivenPlace: givenPlace,
+                Position: position,
+                Department: department,
+                DebitNumber: debitNumber,
+                Salary: salary,
+                StartDate: startDate,
+                Status: status
             };
 
             // Kiểm tra validate
-            if (customerJS.validateDialog(customer)) {
+            if (customerJS.validateDialog(staff)) {
                 // Nếu hành động đang là THÊM
                 if (action == Enum.FormMode.Add) {
                     $.ajax({
-                        url: "/api/Customers",
+                        url: "/api/v1/Staffs",
                         method: "POST",
-                        data: JSON.stringify(customer),
+                        data: JSON.stringify(staff),
                         dataType: "text",
                         contentType: "application/json"
                     }).done(function (res) {
                         // Cho hiển thị ảnh
-                        $("img").attr("src", imageLink);
-
-                        // Lấy ra Id sau khi POST
-                        customer.CustomerId = jQuery.parseJSON(res).CustomerId;
+                        //$("img").attr("src", imageLink);
 
                         // Hiện thị thông báo thêm thành công
                         alert(Resource.Language[commonJS.LanguageCode].AddNew);
 
                         // Load lại dữ liệu ra trang để render
                         customerJS.loadData();
-                    }).fail(function () {
+                    }).fail(function (res) {
                         alert("Lỗi AddNew");
                     })
                 }
                 // Nếu hành động đang là SỬA
                 else if (action == Enum.FormMode.Edit) {
                     $.ajax({
-                        url: "/api/Customers/" + customerId,
+                        url: "/api/v1/Staffs/" + staffId,
                         method: "PUT",
-                        data: JSON.stringify(customer),
+                        data: JSON.stringify(staff),
                         dataType: "text",
                         contentType: "application/json"
                     }).done(function () {
@@ -440,22 +433,19 @@ class CustomerJS {
                 }
                 else if (action == Enum.FormMode.Duplicate) {
                     $.ajax({
-                        url: "/api/Customers",
+                        url: "/api/v1/Staffs",
                         method: "POST",
-                        data: JSON.stringify(customer),
+                        data: JSON.stringify(staff),
                         dataType: "text",
                         contentType: "application/json"
                     }).done(function (res) {
-                        // Lấy ra Id sau khi POST
-                        customer.CustomerId = jQuery.parseJSON(res).CustomerId;
-
                         // Hiện thị thông báo thêm thành công
                         alert(Resource.Language[commonJS.LanguageCode].Duplicate);
 
                         // Load lại dữ liệu ra trang để render
                         customerJS.loadData();
                     }).fail(function () {
-                        alert("Lỗi");
+                        alert("Lỗi Duplicate");
                     })
                 }
 
@@ -475,7 +465,7 @@ class CustomerJS {
      * CreatedBy: LDLONG (3/8/2020)
      * */
     saveAndAddData() {
-        this.saveFile();
+        this.saveData();
         $("#frmDialogDetail").show();
     }
 
@@ -485,21 +475,25 @@ class CustomerJS {
      * */
     resetDialog() {
         try {
-            $('#txtCustomerCode').val("");
-            $('#txtCustomerCode').removeClass("required-error");
-            $('#txtCustomerName').val("");
-            $('#txtCustomerName').removeClass("required-error");
-            $("#txtMemberCode").val("");
-            $("#txtGroupCustomer").val("");
-            $('#txtCompanyName').val("");
+            $('#txtStaffCode').val("");
+            $('#txtStaffCode').removeClass("required-error");
+            $('#txtStaffName').val("");
+            $('#txtStaffName').removeClass("required-error");
             $('#dtBirthday').val("");
-            $('#txtAddress').val("");
+            $('#slGender').val("");
+            $('#txtEmail').val("");
+            $('#txtEmail').removeClass("required-error");
             $('#txtPhoneNumber').val("");
             $('#txtPhoneNumber').removeClass("required-error");
+            $('#txtIdCard').val("");
+            $('#dtGivenDate').val("");
+            $('#txtGivenPlace').val("");
+            $('#slPosition').val("");
+            $('#slDepartment').val("");
             $('#txtDebitNumber').val("");
-            $('#txtEmail').val("");
-            $('.ava-img').attr('src', null);
-            $('#ckIs5FoodMember').prop('checked', false);
+            $('#txtSalary').val("");
+            $('#dtStartDate').val("");
+            $('#slStatus').val("");
         } catch (e) {
             console.log(e);
         }
@@ -534,31 +528,30 @@ class CustomerJS {
      * @param {any} customer
      * CreatedBy: LDLONG (28/7/2020)
      */
-    validateDialog(customer) {
+    validateDialog(staff) {
         try {
             // Nếu ko có Mã, Tên, Số điện thoại thì ko thể Cất
-            if (!customer.CustomerCode.trim()) {
+            if (!staff.StaffCode.trim()) {
                 alert("Bạn chưa điền mã khách hàng!");
                 return false;
             }
-            if (!customer.CustomerName.trim()) {
+            if (!staff.StaffName.trim()) {
                 alert("Bạn phải điền tên khách hàng");
                 return false;
             }
-            if (!customer.PhoneNumber.trim()) {
+            if (!staff.PhoneNumber.trim()) {
                 alert("Bạn phải điền số điện thoại");
                 return false;
             }
-
-            // Nếu ko có email thì nhiễm nhiên đúng định dạng
-            if (!customer.Email.trim()) {
-                return true;
+            if (!staff.Email.trim()) {
+                alert("Bạn phải điền Email");
+                return false;
             }
 
             // Nếu có email thì phải test xem đúng định dạng chưa
             var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
-            if (!reg.test(customer.Email)) {
+            if (!reg.test(staff.Email)) {
                 alert(Resource.Language[commonJS.LanguageCode].InvalidEmail);
                 return false;
             }
@@ -585,10 +578,9 @@ class CustomerJS {
             if (!filter) {
                 filter = "NullValueException";
             }
-
             // Call API GET để lấy toàn bộ data về render vào table
             $.ajax({
-                url: "/api/Customers/" + key + "/" + filter,
+                url: "/api/v1/Staffs/" + key + "/" + filter,
                 method: "GET",
                 data: {},
                 dataType: "json",
@@ -596,7 +588,7 @@ class CustomerJS {
             }).done(function (res) {
                 if (res) {
                     // Sắp xếp lại theo mã khách hàng
-                    res.sort((a, b) => (a.CustomerCode > b.CustomerCode) ? 1 : -1)
+                    //res.sort((a, b) => (a.StaffCode > b.StaffCode) ? 1 : -1)
                     // Số row trên 1 page
                     var numberOfRow = $('#select-num-row').val();
                     // Page thứ bao nhiêu
@@ -617,23 +609,20 @@ class CustomerJS {
                         if (i < allRow && i < res.length) {
                             var item = res[i];
                             var customerInfoHTML = $(`<tr>
-                                <td>`+ item['CustomerCode'] + `</td>
-                                <td>`+ item['CustomerName'] + `</td>
-                                <td>`+ item['CompanyName'] + `</td>
+                                <td>`+ item['StaffCode'] + `</td>
+                                <td>`+ item['StaffName'] + `</td>
+                                <td>`+ item['Gender'] + `</td>
                                 <td>`+ commonJS.formatDate(new Date(item['Birthday'])) + `</td>
-                                <td>`+ item['Address'] + `</td>
                                 <td>`+ item['PhoneNumber'] + `</td>
                                 <td>`+ item['Email'] + `</td>
-                                <td class="align-center">`+ commonJS.buildCheckBoxByValue(item['Is5FoodMember']) + `</td>
+                                <td>`+ item['Position'] + `</td>
+                                <td>`+ item['Department'] + `</td>
+                                <td>`+ commonJS.formatMoney(item['Salary']) + `</td>
+                                <td>`+ item['Status'] + `</td>
                             </tr>`);
 
                             // Ko để hiện ID ra cho người dùng => Ẩn dưới dạng data của row đó
-                            customerInfoHTML.data("id", item["CustomerId"]);
-                            customerInfoHTML.data("memberCode", item["MemberCode"]);
-                            customerInfoHTML.data("groupCustomer", item["GroupCustomer"]);
-                            customerInfoHTML.data("debitNumber", item["DebitNumber"]);
-                            customerInfoHTML.data("imageLink", item["ImageLink"]);
-
+                            customerInfoHTML.data("id", item["StaffId"]);
                             // Render data vào table để render
                             $('table#tbListCustomer tbody').append(customerInfoHTML);
                         }

@@ -37,7 +37,7 @@ namespace MISA.CukCuk08
                     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 });
-            services.AddDbContext<CustomerdbContext>(options => options
+            services.AddDbContext<StaffdbContext>(options => options
                .UseMySql("server=35.194.166.58;port=3306;user=nvmanh;password=12345678@Abc;database=MISACukCuk_LDLONG;",
                    mysqlOptions =>
                        mysqlOptions.ServerVersion(new ServerVersion(new Version(10, 4, 6), ServerType.MariaDb))));

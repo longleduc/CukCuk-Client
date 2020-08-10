@@ -7,6 +7,7 @@ var commonJS = {
     * CreatedBy: NVMANH (20/07/2020)
     */
     formatMoney(money) {
+        if (!money) return "";
         return money.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
     },
 

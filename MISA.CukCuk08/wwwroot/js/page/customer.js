@@ -57,6 +57,12 @@ class CustomerJS {
         $('.btnEndPage').on('click', this.btnEndPageOnClick.bind(this));
         $('.btnReload').on('click', this.btnFirstPageOnClick.bind(this));
 
+        // Khi ấn nút Yes trên warning-box
+        $('#btn-yes-warning').on('click', Enum.FormMode.Delete, this.DeleteStaff.bind(this));
+
+        // Khi ấn nút No trên warning-box
+        $('#btn-close-warning').on('click', 0, this.NotDeleteStaff);
+
         // Khi uploaded ảnh
         //$('#fileImg').on('change', this.showImageFromInput);
     }
@@ -73,6 +79,8 @@ class CustomerJS {
         $("#frmDialogDetail").show();
         // Focus vào ô input đầu tiên của dialog
         $('#txtStaffCode').focus();
+        // Mã nhân viên = mã nhân viên lớn nhất hiện tại + 1
+        $('#txtStaffCode').val(commonJS.formatCode(maxCode));
     }
 
     /**
@@ -136,7 +144,28 @@ class CustomerJS {
      */
     btnDeleteOnClick(sender) {
         try {
+            //action = hành động xóa
+            action = sender.data;
+            // Nếu tìm thấy row có class là row-selected
+            if ($('.row-selected').length !== 0) {
+                // Gán tên nhân viên vào warning-box
+                $('#staff-name').html($('.row-selected').find('td:eq(1)').text());
+
+                // Show ra warning-box
+                $('#warning-box').show();
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    DeleteStaff(sender) {
+        try {
             var customerJS = this;
+
+            // Đóng cửa số warning-box
+            $('#warning-box').hide();
+
             //action = hành động xóa
             action = sender.data;
             // Nếu tìm thấy row có class là row-selected
@@ -169,6 +198,20 @@ class CustomerJS {
 
             // Reset lại dialog
             customerJS.resetDialog();
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    NotDeleteStaff(sender) {
+        try {
+            //action = hành động xóa
+            action = sender.data;
+            // Nếu tìm thấy row có class là row-selected
+            if ($('.row-selected').length !== 0) {
+                // Show ra warning-box
+                $('#warning-box').hide();
+            }
         } catch (e) {
             console.log(e);
         }
@@ -293,6 +336,9 @@ class CustomerJS {
                     $('.start-row').html(numberOfRow * (pageNumber - 1) + 1);
                     $('.end-row').html(Math.min(numberOfRow * pageNumber, allRow));
                     $('.total-row').html(allRow);
+
+                    //Lấy ra mã nhân viên lớn nhất
+                    maxCode = res[res.length - 1].StaffCode;
 
                     // Duyệt qua các phần tử để render dữ liệu
                     for (var i = numberOfRow * (pageNumber - 1); i <= numberOfRow * pageNumber - 1; i++)
@@ -568,6 +614,10 @@ class CustomerJS {
      * */
     filterFunction() {
         try {
+            setTimeout(function () {
+                //wait for 3 seconds
+            }, 3000);
+
             //Xóa data trong table đi để render lại
             $('table#tbListCustomer tbody').empty();
             // filter = Giá trị ô vừa điền 
@@ -743,3 +793,6 @@ var action;
 
 // Lưu tổng số khách hàng
 var allRow;
+
+// Lưu mã nhân viên lớn nhất
+var maxCode;

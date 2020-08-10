@@ -50,4 +50,15 @@ var commonJS = {
         day = (day < 10) ? "0" + day : day;
         return year + "-" + month + "-" + day;
     },
+    /**
+     * Hàm trả về mã nhân viên lớn nhất + 1
+     * @param {any} maxCode
+     */
+    formatCode(maxCode) {
+        var tmp = (parseInt(maxCode.substr(2, 5)) + 1).toString();
+        while (tmp.length < 5) {
+            tmp = '0' + tmp;
+        }
+        return "NV" + tmp;
+    }
 }

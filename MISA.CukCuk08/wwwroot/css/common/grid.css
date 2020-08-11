@@ -50,3 +50,8 @@ table {
     .search-input {
         width: 7rem;
     }
+
+        .search-input:focus {
+            outline: none;
+            /*border: 1px solid #719ECE;*/
+        }

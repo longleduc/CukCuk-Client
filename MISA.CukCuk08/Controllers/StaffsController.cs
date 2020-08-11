@@ -229,19 +229,41 @@ namespace MISA.CukCuk08.Controllers
         }
 
         // DELETE: api/Staffs/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Staff>> DeleteStaff(Guid? id)
+        //[HttpDelete("{id}")]
+        //public async Task<ActionResult<Staff>> DeleteStaff(Guid? id)
+        //{
+        //    var staff = await _context.Staff.FindAsync(id);
+        //    if (staff == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    _context.Staff.Remove(staff);
+        //    await _context.SaveChangesAsync();
+
+        //    return staff;
+        //}
+
+        // DELETE: api/Staffs/5
+        [HttpDelete]
+        public async Task<ActionResult<Staff>> DeleteStaff([FromBody] List<Guid> IdList)
         {
-            var staff = await _context.Staff.FindAsync(id);
-            if (staff == null)
+            List<Staff> deleteStaff = new List<Staff>();
+            foreach (var id in IdList)
             {
-                return NotFound();
+                var staff = await _context.Staff.FindAsync(id);
+                if (staff == null)
+                {
+                    return NotFound();
+                }
+
+                deleteStaff.Add(staff);
             }
 
-            _context.Staff.Remove(staff);
+            _context.Staff.RemoveRange(deleteStaff);
             await _context.SaveChangesAsync();
 
-            return staff;
+            return Ok();
         }
 
         private bool StaffExists(Guid? id)

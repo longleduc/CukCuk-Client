@@ -1,17 +1,15 @@
-﻿var Enum = {
+﻿// Các key báo nút vừa nhập
+var Enum = {
     FormMode: {
         Add: 1,
         Duplicate: 2,
         Edit: 3,
         Delete: 4,
-        Refresh: 5,
-        Import: 6,
-        Export: 7,
-        Group: 8,
-        Help: 9
+        DeleteALot: 5
     },
-}
+};
 
+// Các thông báo
 var Resource = {
     Language: {
         VI: {
@@ -28,4 +26,19 @@ var Resource = {
         EN: {
         }
     }
-}
+};
+
+// Tổng số bản ghi
+var allRow;
+
+// Mã nhân viên lớn nhất
+var maxCode;
+
+// Nút vừa bấm
+var action;
+
+// Linh avatar 
+var avaLink;
+
+// List chứa id bị xóa
+var listDeleteStaff = [];

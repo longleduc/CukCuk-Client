@@ -81,12 +81,6 @@ namespace MISA.CukCuk08.Models
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_general_ci");
 
-                entity.Property(e => e.FirstName)
-                    .HasColumnType("varchar(100)")
-                    .HasComment("Họ")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_general_ci");
-
                 entity.Property(e => e.GroupCustomer)
                     .HasColumnType("varchar(255)")
                     .HasComment("Nhóm thành viên")
@@ -101,21 +95,9 @@ namespace MISA.CukCuk08.Models
 
                 entity.Property(e => e.Is5FoodMember).HasComment("Là thành viên 5 Food");
 
-                entity.Property(e => e.LastName)
-                    .HasColumnType("varchar(100)")
-                    .HasComment("Tên")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_general_ci");
-
                 entity.Property(e => e.MemberCode)
                     .HasColumnType("varchar(20)")
                     .HasComment("Mã thẻ thành viên")
-                    .HasCharSet("utf8mb4")
-                    .HasCollation("utf8mb4_general_ci");
-
-                entity.Property(e => e.MiddleName)
-                    .HasColumnType("varchar(100)")
-                    .HasComment("Tên Đệm")
                     .HasCharSet("utf8mb4")
                     .HasCollation("utf8mb4_general_ci");
 

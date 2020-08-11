@@ -58,16 +58,16 @@ class StaffJS {
         $('.btnReload').on('click', this.btnFirstPageOnClick.bind(this));
 
         // Khi ấn nút Yes trên warning-box
-        $('#btn-yes-warning').on('click', Enum.FormMode.Delete, this.DeleteStaff.bind(this));
+        $('#btn-yes-warning').on('click', Enum.FormMode.Delete, this.deleteStaff.bind(this));
 
         // Khi ấn nút No trên warning-box
-        $('#btn-close-warning').on('click', 0, this.NotDeleteStaff);
+        $('#btn-close-warning').on('click', 0, this.notDeleteStaff);
 
         // Khi uploaded ảnh
         $('#fileUpload').on('change', this.showImageFromInput);
 
         // Khi xóa ảnh
-        $('.delete-avatar').on('click', this.DeleteImage);
+        $('.delete-avatar').on('click', this.deleteImage);
     }
 
     /**
@@ -107,25 +107,11 @@ class StaffJS {
                     dataType: "json",
                     contentType: "application/json",
                 }).done(function (res) {
+                    // Lấy ra link ava
+                    avaLink = res.ImageLink;
+
                     // Gán data lấy ra vào dialog
-                    $('#txtStaffCode').val(res['StaffCode']);
-                    $('#txtStaffName').val(res['StaffName']);
-                    $('#dtBirthday').val(commonJS.formatDateToBind(new Date(res['Birthday'])));
-                    $('#slGender').val(res['Gender']);
-                    $('#txtEmail').val(res['Email']);
-                    $('#txtPhoneNumber').val(res['PhoneNumber']);
-                    $('#txtIdCard').val(res['IdCard']);
-                    $('#dtGivenDate').val(commonJS.formatDateToBind(new Date(res['GivenDate'])));
-                    $('#txtGivenPlace').val(res['GivenPlace']);
-                    $('#slPosition').val(res['Position']);
-                    $('#slDepartment').val(res['Department']);
-                    $('#txtDebitNumber').val(res['DebitNumber']);
-                    $('#txtSalary').val(commonJS.formatMoney(res['Salary']));
-                    $('#dtStartDate').val(commonJS.formatDateToBind(new Date(res['StartDate'])));
-                    $('#slStatus').val(res['Status']);
-                    var imageUrl = commonJS.formatImageLink(res['ImageLink']);
-                    $(".ava-img").attr("src", imageUrl);
-                    $(".ava-img").css("visibility", "visible");
+                    commonJS.bindDataToForm(res);
                 }).fail(function () {
                     alert("Lỗi");
                 });
@@ -154,18 +140,22 @@ class StaffJS {
             action = sender.data;
             // Nếu tìm thấy row có class là row-selected
             if ($('.row-selected').length !== 0) {
-                //// Gán tên nhân viên vào warning-box
-                //$('#staff-name').html($('.row-selected').find('td:eq(1)').text());
-
                 // Show ra warning-box
                 $('#warning-box').show();
+            } else {
+                alert(Resource.Language[commonJS.LanguageCode].CantDelete);
             }
         } catch (e) {
             console.log(e);
         }
     }
 
-    DeleteStaff(sender) {
+    /**
+     * Hàm khi ấn nút Xóa
+     * CreatedBy: LDLONG (10/08/2020)
+     * @param {any} sender
+     */
+    deleteStaff(sender) {
         try {
             var staffJS = this;
 
@@ -177,18 +167,21 @@ class StaffJS {
             // Nếu tìm thấy row có class là row-selected
             if ($('.row-selected').length !== 0) {
                 // Lấy ra ID của hàng đang được chọn
-                var staffId = $('.row-selected').data('id')
-
+                //var staffId = $('.row-selected').data('id')
                 // Call API DELETE với ID ở trên
+                debugger
                 $.ajax({
-                    url: "/api/v1/Staffs/" + staffId,
+                    url: "/api/v1/staffs",
                     method: "DELETE",
-                    data: {},
-                    dataType: "text",
+                    data: JSON.stringify(listDeleteStaff),
+                    //dataType: "",
                     contentType: "application/json"
                 }).done(function () {
                     // Hiện thị thông báo thêm thành công
                     alert(Resource.Language[commonJS.LanguageCode].Delete);
+
+                    // Reset lại list id bị xóa
+                    listDeleteStaff = [];
 
                     // Load lại dữ liệu ra trang để render
                     staffJS.loadData();
@@ -209,7 +202,12 @@ class StaffJS {
         }
     }
 
-    NotDeleteStaff(sender) {
+    /**
+     * Khi ấn nút đóng warning
+     * CreatedBy: LDLONG (10/08/2020)
+     * @param {any} sender
+     */
+    notDeleteStaff(sender) {
         try {
             //action = hành động xóa
             action = sender.data;
@@ -223,6 +221,11 @@ class StaffJS {
         }
     }
 
+    /**
+     * Hàm khi ấn nút nhân bản
+     * CreatedBy: LDLONG(10/08/2020)
+     * @param {any} sender
+     */
     btnDuplicateOnClick(sender) {
         try {
             // action = hành động Edit
@@ -239,21 +242,14 @@ class StaffJS {
                     dataType: "json",
                     contentType: "application/json",
                 }).done(function (res) {
+                    // Lấy ra link ava
+                    avaLink = res.ImageLink;
+
                     // Gán data lấy ra vào dialog
-                    $('#txtStaffName').val(res['StaffName']);
-                    $('#dtBirthday').val(commonJS.formatDateToBind(new Date(res['Birthday'])));
-                    $('#slGender').val(res['Gender']);
-                    $('#txtEmail').val(res['Email']);
-                    $('#txtPhoneNumber').val(res['PhoneNumber']);
-                    $('#txtIdCard').val(res['IdCard']);
-                    $('#dtGivenDate').val(commonJS.formatDateToBind(new Date(res['GivenDate'])));
-                    $('#txtGivenPlace').val(res['GivenPlace']);
-                    $('#slPosition').val(res['Position']);
-                    $('#slDepartment').val(res['Department']);
-                    $('#txtDebitNumber').val(res['DebitNumber']);
-                    $('#txtSalary').val(res['Salary']);
-                    $('#dtStartDate').val(commonJS.formatDateToBind(new Date(res['StartDate'])));
-                    $('#slStatus').val(res['Status']);
+                    commonJS.bindDataToForm(res);
+
+                    // Reset ô mã nhân viên
+                    $('#txtStaffCode').val("");
                 }).fail(function () {
                     alert("Lỗi");
                 });
@@ -301,9 +297,32 @@ class StaffJS {
     * Sự kiện khi click chọn 1 dòng trong table
     * CreatedBy: LDLONG (24/07/2020)
     * */
+    //TODO: Check xem bỏ tick hay tick (đang bị lỗi classList contains)
     rowOnClick() {
-        this.classList.toggle("row-selected");
-        $(this).siblings().removeClass("row-selected");
+        debugger;
+        if (event.ctrlKey) {
+            this.classList.toggle("row-selected");
+            $('#btnEdit').prop('disabled', true);
+            $('#btnDuplicate').prop('disabled', true);
+            if ($(this).classList.contains("row-selected")) {
+                // Add phần tử vào list để xóa
+                listDeleteStaff.push($(this).data("id"));
+            } else {
+                var tmp = listDeleteStaff.indexOf($(this).data("id"));
+                listDeleteStaff.splice(tmp, 1);
+            }
+        } else {
+            this.classList.toggle("row-selected");
+            $(this).siblings().removeClass("row-selected");
+            $('#btnEdit').prop('disabled', false);
+            $('#btnDuplicate').prop('disabled', false);
+            // Khi ko ấn bằng Ctrl => Reset list chứa phần tử để xóa
+            listDeleteStaff = [];
+            if ($(this).classList.contains("row-selected")) {
+                // Add phần tử vào list để xóa
+                listDeleteStaff.push($(this).data("id"));
+            }
+        }
     }
 
     /**
@@ -324,50 +343,7 @@ class StaffJS {
                 contentType: "application/json",
             }).done(function (res) {
                 if (res) {
-                    // Số row trên 1 page
-                    var numberOfRow = $('#select-num-row').val();
-
-                    // Page thứ bao nhiêu
-                    var pageNumber = $('#page-number').val();
-
-                    // Tổng số khách hàng
-                    allRow = res.length;
-
-                    // Với số khách hàng đó thì sẽ có tối đa bao nhiêu page
-                    var totalPage = parseInt(allRow / numberOfRow);
-                    if (allRow % numberOfRow !== 0) totalPage += 1;
-
-                    // Gán dữ liệu cho thanh paging
-                    $('.total-page').html(totalPage);
-                    $('.start-row').html(numberOfRow * (pageNumber - 1) + 1);
-                    $('.end-row').html(Math.min(numberOfRow * pageNumber, allRow));
-                    $('.total-row').html(allRow);
-
-                    //Lấy ra mã nhân viên lớn nhất
-                    maxCode = res[res.length - 1].StaffCode;
-
-                    // Duyệt qua các phần tử để render dữ liệu
-                    for (var i = numberOfRow * (pageNumber - 1); i <= numberOfRow * pageNumber - 1; i++)
-                        if (i < allRow && i < res.length) {
-                            var item = res[i];
-                            var customerInfoHTML = $(`<tr>
-                                <td>`+ item['StaffCode'] + `</td>
-                                <td>`+ item['StaffName'] + `</td>
-                                <td>`+ item['Gender'] + `</td>
-                                <td>`+ commonJS.formatDate(new Date(item['Birthday'])) + `</td>
-                                <td>`+ item['PhoneNumber'] + `</td>
-                                <td>`+ item['Email'] + `</td>
-                                <td>`+ item['Position'] + `</td>
-                                <td>`+ item['Department'] + `</td>
-                                <td>`+ commonJS.formatMoney(item['Salary']) + `</td>
-                                <td>`+ item['Status'] + `</td>
-                            </tr>`);
-
-                            // Ko để hiện ID ra cho người dùng => Ẩn dưới dạng data của row đó
-                            customerInfoHTML.data("id", item["StaffId"]);
-                            // Render data vào table để render
-                            $('table#tbListCustomer tbody').append(customerInfoHTML);
-                        }
+                    commonJS.renderData(res);
                 }
             }).fail(function () {
                 alert("Lỗi");
@@ -444,8 +420,7 @@ class StaffJS {
 
             // Kiểm tra validate
             if (staffJS.validateDialog(staff)) {
-                // Nếu hành động đang là THÊM
-                if (action == Enum.FormMode.Add) {
+                if (action == Enum.FormMode.Add || action == Enum.FormMode.Duplicate) {
                     $.ajax({
                         url: "/api/v1/Staffs",
                         method: "POST",
@@ -453,7 +428,10 @@ class StaffJS {
                         dataType: "text",
                         contentType: "application/json"
                     }).done(function (res) {
+                        // Chuyển kết quả nhận đc về dạng object
                         res = JSON.parse(res);
+
+                        // Nếu bị trùng mã nhân viên => Result = Fail
                         if (res.Result == "Fail") {
                             alert("Mã nhân viên trùng với mã nhân viên " + res.existStaff.StaffName);
                         } else {
@@ -467,7 +445,6 @@ class StaffJS {
                         alert("Lỗi AddNew");
                     })
                 }
-                // Nếu hành động đang là SỬA
                 else if (action == Enum.FormMode.Edit) {
                     $.ajax({
                         url: "/api/v1/Staffs/" + staffId,
@@ -483,23 +460,6 @@ class StaffJS {
                         staffJS.loadData();
                     }).fail(function () {
                         alert("Lỗi");
-                    })
-                }
-                else if (action == Enum.FormMode.Duplicate) {
-                    $.ajax({
-                        url: "/api/v1/Staffs",
-                        method: "POST",
-                        data: JSON.stringify(staff),
-                        dataType: "text",
-                        contentType: "application/json"
-                    }).done(function (res) {
-                        // Hiện thị thông báo thêm thành công
-                        alert(Resource.Language[commonJS.LanguageCode].Duplicate);
-
-                        // Load lại dữ liệu ra trang để render
-                        staffJS.loadData();
-                    }).fail(function () {
-                        alert("Lỗi Duplicate");
                     })
                 }
 
@@ -626,10 +586,6 @@ class StaffJS {
      * */
     filterFunction() {
         try {
-            setTimeout(function () {
-                //wait for 3 seconds
-            }, 3000);
-
             //Xóa data trong table đi để render lại
             $('table#tbListCustomer tbody').empty();
             // filter = Giá trị ô vừa điền 
@@ -649,45 +605,7 @@ class StaffJS {
                 contentType: "application/json",
             }).done(function (res) {
                 if (res) {
-                    // Sắp xếp lại theo mã khách hàng
-                    //res.sort((a, b) => (a.StaffCode > b.StaffCode) ? 1 : -1)
-                    // Số row trên 1 page
-                    var numberOfRow = $('#select-num-row').val();
-                    // Page thứ bao nhiêu
-                    var pageNumber = $('#page-number').val();
-                    // Tổng số khách hàng
-                    allRow = res.length;
-                    // Với số khách hàng đó thì sẽ có tối đa bao nhiêu page
-                    var totalPage = parseInt(allRow / numberOfRow);
-                    if (allRow % numberOfRow !== 0) totalPage += 1;
-                    // Gán dữ liệu cho thanh paging
-                    $('.total-page').html(totalPage);
-                    $('.start-row').html(numberOfRow * (pageNumber - 1) + 1);
-                    $('.end-row').html(Math.min(numberOfRow * pageNumber, allRow));
-                    $('.total-row').html(allRow);
-
-                    // Duyệt qua các phần tử để render dữ liệu
-                    for (var i = numberOfRow * (pageNumber - 1); i <= numberOfRow * pageNumber - 1; i++)
-                        if (i < allRow && i < res.length) {
-                            var item = res[i];
-                            var customerInfoHTML = $(`<tr>
-                                <td>`+ item['StaffCode'] + `</td>
-                                <td>`+ item['StaffName'] + `</td>
-                                <td>`+ item['Gender'] + `</td>
-                                <td>`+ commonJS.formatDate(new Date(item['Birthday'])) + `</td>
-                                <td>`+ item['PhoneNumber'] + `</td>
-                                <td>`+ item['Email'] + `</td>
-                                <td>`+ item['Position'] + `</td>
-                                <td>`+ item['Department'] + `</td>
-                                <td>`+ commonJS.formatMoney(item['Salary']) + `</td>
-                                <td>`+ item['Status'] + `</td>
-                            </tr>`);
-
-                            // Ko để hiện ID ra cho người dùng => Ẩn dưới dạng data của row đó
-                            customerInfoHTML.data("id", item["StaffId"]);
-                            // Render data vào table để render
-                            $('table#tbListCustomer tbody').append(customerInfoHTML);
-                        }
+                    commonJS.renderData(res);
                 }
             }).fail(function () {
                 alert("Lỗi");
@@ -769,14 +687,15 @@ class StaffJS {
                     processData: false,
                     contentType: false,
                 }).done(function (imageLink) {
+                    avaLink = imageLink;
                     // Gửi dữ liệu staff sau khi có link ảnh về DB
-                    staffJS.saveData(staffJS, imageLink);
+                    staffJS.saveData(staffJS, avaLink);
                 }).fail(function () {
                     alert("Lỗi saveFile");
                 });
             } else {
                 // Gửi dữ liệu staff sau khi có link ảnh về DB
-                staffJS.saveData(staffJS, null);
+                staffJS.saveData(staffJS, avaLink);
             }
         } catch (e) {
             console.log(e);
@@ -802,18 +721,11 @@ class StaffJS {
      * Sự kiện khi xóa ảnh
      * CreatedBy: LDLONG (10/08/2020)
      * */
-    DeleteImage() {
+    deleteImage() {
         var imageUrl = "/content/images/avatardefault.png";
+        avaLink = null;
+        $('#fileUpload').val(null);
         $(".ava-img").attr("src", imageUrl);
         $(".ava-img").css("visibility", "visible");
     }
 }
-
-// Lưu nút vừa được bấm
-var action;
-
-// Lưu tổng số khách hàng
-var allRow;
-
-// Lưu mã nhân viên lớn nhất
-var maxCode;

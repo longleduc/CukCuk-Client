@@ -16,7 +16,7 @@
 .dialog {
     position: fixed;
     width: 650px;
-    height: 500px   ;
+    height: 500px;
     background-color: #ffffff;
     top: calc(50% - 290px);
     left: calc(50% - 300px);
@@ -56,7 +56,8 @@
     display: inline-block;
     width: 125px;
 }
-.dialog-body .row{
+
+.dialog-body .row {
     margin: 7px;
 }
 
@@ -71,10 +72,10 @@
     height: 20px;
 }
 
-.dialog .dialog-footer .footer-left{
-    position:absolute;
-    left: 5px;
-}
+    .dialog .dialog-footer .footer-left {
+        position: absolute;
+        left: 5px;
+    }
 
     .dialog .dialog-footer .footer-right {
         position: absolute;
@@ -151,13 +152,19 @@
     border: 1px solid #d9d9d9;
 }
 
-    .row input:focus {
-        outline: none !important;
-        border: 1px solid #719ECE;
-        box-shadow: 0 0 10px #0072bc;
-    }
+.row input:focus {
+    outline: none !important;
+    border: 1px solid #719ECE;
+    box-shadow: 0 0 10px #0072bc;
+}
 
-.required-error{
+.row select:focus {
+    outline: none !important;
+    border: 1px solid #719ECE;
+    box-shadow: 0 0 10px #0072bc;
+}
+
+.required-error {
     border: 1px solid #ff0000 !important;
 }
 
@@ -241,4 +248,20 @@
     right: 3%;
     width: 150px;
     height: 150px;
+}
+
+.date {
+    text-align: center;
+}
+
+input[type=date]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
+
+
+
+input[type=date]::-webkit-calendar-picker-indicator {
+    -webkit-appearance: none;
+    display: none;
 }

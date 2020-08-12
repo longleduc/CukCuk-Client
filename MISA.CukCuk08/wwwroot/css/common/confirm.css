@@ -1,0 +1,23 @@
+﻿#confirm-dialog {
+    position: absolute;
+    display: none;
+}
+
+.warning .button-group #btn-yes-confirm {
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.warning .button-group #btn-close-confirm {
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.content-dialog {
+    position: absolute;
+    top: 18%;
+    right: -1%;
+    width: 100%;
+    font-weight: 200;
+    height: 20%;
+}

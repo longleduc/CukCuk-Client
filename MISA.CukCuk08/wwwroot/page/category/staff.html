@@ -13,6 +13,7 @@
     <link href="/css/common/dialog.css" rel="stylesheet" />
     <link href="/css/common/paging.css" rel="stylesheet" />
     <link href="/css/common/warning.css" rel="stylesheet" />
+    <link href="/css/common/confirm.css" rel="stylesheet" />
     <link rel="icon" type="image/png" href="/content/favicon/favicon.ico" />
 </head>
 <body>
@@ -37,9 +38,6 @@
                     <option>Tiếng Anh</option>
                 </select>
             </div>
-            <div class="noti-icon"></div>
-            <div class="question-icon"></div>
-            <div class="messenger-icon"></div>
             <div class="account">
                 <div class="account-icon"></div>
                 <div class="account-name">
@@ -184,14 +182,14 @@
                             <tr>
                                 <th><input class="search-input" type="text" /></th>
                                 <th><input class="search-input" type="text" /></th>
+                                <th><input class="search-input" type="text" disabled /></th>
+                                <th><input class="search-input" type="text" disabled /></th>
                                 <th><input class="search-input" type="text" /></th>
                                 <th><input class="search-input" type="text" /></th>
+                                <th><input class="search-input" type="text" disabled /></th>
+                                <th><input class="search-input" type="text" disabled /></th>
                                 <th><input class="search-input" type="text" /></th>
-                                <th><input class="search-input" type="text" /></th>
-                                <th><input class="search-input" type="text" /></th>
-                                <th><input class="search-input" type="text" /></th>
-                                <th><input class="search-input" type="text" /></th>
-                                <th><input class="search-input" type="text" /></th>
+                                <th><input class="search-input" type="text" disabled /></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -275,7 +273,7 @@
                     <div class="row">
                         <label>Ngày sinh</label>
                         <input class="date small-input" id="dtBirthday" type="date" />
-                        <label>Giới tính</label>
+                        <label class="label-right">Giới tính</label>
                         <select class="small-input" id="slGender">
                             <option disabled selected value> -- Bấm để chọn -- </option>
                             <option>Nam</option>
@@ -292,8 +290,8 @@
                     </div>
                     <div class="row">
                         <label>Số CMT</label>
-                        <input class="small-input" id="txtIdCard" type="text" style="height:22px;" />
-                        <label>Ngày cấp</label>
+                        <input class="small-input" id="txtIdCard" type="text" />
+                        <label class="label-right">Ngày cấp</label>
                         <input class="date small-input" id="dtGivenDate" type="date" />
                     </div>
                     <div class="form-upload-image">
@@ -343,13 +341,14 @@
                     <div class="row">
                         <label>Mã số thuế</label>
                         <input class="small-input" id="txtDebitNumber" type="text" />
-                        <label>Mức lương</label>
-                        <input class="avg-input" id="txtSalary" type="text" />
+                        <label class="label-right">Mức lương</label>
+                        <input id="txtSalary" type="text" />
+                        <p class="monetary-unit">(VNĐ)</p>
                     </div>
                     <div class="row">
                         <label>Ngày gia nhập</label>
                         <input class="date small-select" id="dtStartDate" type="date" />
-                        <label>Tình trạng</label>
+                        <label class="label-right">Tình trạng</label>
                         <select class="avg-select" id="slStatus">
                             <option disabled selected value> -- Bấm để chọn -- </option>
                             <option>Đang làm việc</option>
@@ -383,11 +382,31 @@
                 <div class="content-warning">
                     <div class="icon">
                     </div>
-                    <h2 class="content">Bạn có chắc chắn muốn xóa ?</h2>
+                    <h2 class="content-warning-text">Bạn có chắc chắn muốn xóa ?</h2>
                 </div>
                 <div class="button-group">
                     <button id="btn-yes-warning">Có</button>
                     <button id="btn-close-warning">Không</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirm-dialog">
+        <div class="warning-modal"></div>
+        <div class="warning">
+            <div class="warning-titlebar">
+                <div class="title">CukCuk - Quản lý nhà hàng</div>
+            </div>
+            <div class="warning-body">
+                <div class="content-warning">
+                    <div class="icon">
+                    </div>
+                    <h2 class="content-dialog">Bạn có chắc chắn muốn đóng và ko lưu ?</h2>
+                </div>
+                <div class="button-group">
+                    <button id="btn-yes-confirm">Có</button>
+                    <button id="btn-close-confirm">Không</button>
                 </div>
             </div>
         </div>

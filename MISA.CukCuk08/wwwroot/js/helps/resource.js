@@ -14,7 +14,6 @@ var Resource = {
     Language: {
         VI: {
             AddNew: "Thêm mới thành công",
-            LackOfInfo: "Vui lòng điền đầy đủ thông tin cần thiết",
             InvalidEmail: "Email không hợp lệ",
             Edit: "Sửa thành công",
             CantEdit: "Vui lòng chọn khách hàng để sửa",

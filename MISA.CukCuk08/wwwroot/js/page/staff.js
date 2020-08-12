@@ -63,6 +63,12 @@ class StaffJS {
         // Khi ấn nút No trên warning-box
         $('#btn-close-warning').on('click', 0, this.notDeleteStaff);
 
+        // Khi ấn nút Yes trên confirm-dialog
+        $('#btn-yes-confirm').on('click', this.btnYesConfirmOnClick);
+
+        // Khi ấn nút Yes trên confirm-dialog
+        $('#btn-close-confirm').on('click', this.btnNoConfirmOnClick);
+
         // Khi uploaded ảnh
         $('#fileUpload').on('change', this.showImageFromInput);
 
@@ -169,7 +175,6 @@ class StaffJS {
                 // Lấy ra ID của hàng đang được chọn
                 //var staffId = $('.row-selected').data('id')
                 // Call API DELETE với ID ở trên
-                debugger
                 $.ajax({
                     url: "/api/v1/staffs",
                     method: "DELETE",
@@ -267,17 +272,29 @@ class StaffJS {
         }
     }
 
+    btnYesConfirmOnClick() {
+        // Reset action
+        action = 0;
+        // Đóng thông báo confirm
+        $('#confirm-dialog').hide();
+        // Hide dialog
+        $("#frmDialogDetail").hide();
+        // Reset lại dialog chuẩn bị cho lần nhập sau
+        this.resetDialog();
+    }
+
+    btnNoConfirmOnClick() {
+        // Đóng thông báo confirm
+        $('#confirm-dialog').hide();
+    }
+
     /**
     * Sự kiện khi click button đóng dưới footer của Dialog
     * CreatedBy: LDLONG (24/07/2020)
     * */
-    btnCloseOnClick(sender) {
-        // action = hành động close
-        action = sender.data;
-        // Hide dialog
-        $("#frmDialogDetail").hide();
-        // Reset lại dialog  chuẩn bị cho lần nhập sau
-        this.resetDialog();
+    btnCloseOnClick() {
+        // Mở thông báo confirm
+        $('#confirm-dialog').show();
     }
 
     /**
@@ -285,26 +302,20 @@ class StaffJS {
     * CreatedBy: LDLONG (24/07/2020)
     * */
     btnCloseHeaderOnClick(sender) {
-        // action = hành động close
-        action = sender.data;
-        //Hide dialog
-        $("#frmDialogDetail").hide();
-        // Reset lại dialog  chuẩn bị cho lần nhập sau
-        this.resetDialog();
+        // Mở thông báo confirm
+        $('#confirm-dialog').show();
     }
 
     /**
     * Sự kiện khi click chọn 1 dòng trong table
     * CreatedBy: LDLONG (24/07/2020)
     * */
-    //TODO: Check xem bỏ tick hay tick (đang bị lỗi classList contains)
     rowOnClick() {
-        debugger;
         if (event.ctrlKey) {
             this.classList.toggle("row-selected");
             $('#btnEdit').prop('disabled', true);
             $('#btnDuplicate').prop('disabled', true);
-            if ($(this).classList.contains("row-selected")) {
+            if (this.classList.contains("row-selected")) {
                 // Add phần tử vào list để xóa
                 listDeleteStaff.push($(this).data("id"));
             } else {
@@ -318,7 +329,7 @@ class StaffJS {
             $('#btnDuplicate').prop('disabled', false);
             // Khi ko ấn bằng Ctrl => Reset list chứa phần tử để xóa
             listDeleteStaff = [];
-            if ($(this).classList.contains("row-selected")) {
+            if (this.classList.contains("row-selected")) {
                 // Add phần tử vào list để xóa
                 listDeleteStaff.push($(this).data("id"));
             }

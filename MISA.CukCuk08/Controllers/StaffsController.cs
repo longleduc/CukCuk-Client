@@ -79,16 +79,16 @@ namespace MISA.CukCuk08.Controllers
                         }
                     }
                     break;
-                case 2:
-                    // Tìm theo Gender
-                    foreach (var item in Staff)
-                    {
-                        if (item.Gender.Contains(filter))
-                        {
-                            res.Add(item);
-                        }
-                    }
-                    break;
+                //case 2:
+                //    // Tìm theo Gender
+                //    foreach (var item in Staff)
+                //    {
+                //        if (item.Gender.Contains(filter))
+                //        {
+                //            res.Add(item);
+                //        }
+                //    }
+                //    break;
                 case 4:
                     // Tìm theo PhoneNumber
                     foreach (var item in Staff)
@@ -109,26 +109,26 @@ namespace MISA.CukCuk08.Controllers
                         }
                     }
                     break;
-                case 6:
-                    // Tìm theo Position
-                    foreach (var item in Staff)
-                    {
-                        if (item.Position.Contains(filter))
-                        {
-                            res.Add(item);
-                        }
-                    }
-                    break;
-                case 7:
-                    // Tìm theo Department
-                    foreach (var item in Staff)
-                    {
-                        if (item.Department.Contains(filter))
-                        {
-                            res.Add(item);
-                        }
-                    }
-                    break;
+                //case 6:
+                //    // Tìm theo Position
+                //    foreach (var item in Staff)
+                //    {
+                //        if (item.Position.Contains(filter))
+                //        {
+                //            res.Add(item);
+                //        }
+                //    }
+                //    break;
+                //case 7:
+                //    // Tìm theo Department
+                //    foreach (var item in Staff)
+                //    {
+                //        if (item.Department.Contains(filter))
+                //        {
+                //            res.Add(item);
+                //        }
+                //    }
+                //    break;
                 case 8:
                     // Tìm theo Salary
                     foreach (var item in Staff)
@@ -139,16 +139,16 @@ namespace MISA.CukCuk08.Controllers
                         }
                     }
                     break;
-                case 9:
-                    // Tìm theo Status
-                    foreach (var item in Staff)
-                    {
-                        if (item.Status.Contains(filter))
-                        {
-                            res.Add(item);
-                        }
-                    }
-                    break;
+                //case 9:
+                //    // Tìm theo Status
+                //    foreach (var item in Staff)
+                //    {
+                //        if (item.Status.Contains(filter))
+                //        {
+                //            res.Add(item);
+                //        }
+                //    }
+                //    break;
             }
 
             if (res == null)

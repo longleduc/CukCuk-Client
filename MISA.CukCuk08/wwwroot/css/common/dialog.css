@@ -15,7 +15,7 @@
 
 .dialog {
     position: fixed;
-    width: 650px;
+    width: 700px;
     height: 500px;
     background-color: #ffffff;
     top: calc(50% - 290px);
@@ -84,7 +84,7 @@
 
 .small-input {
     height: 20px;
-    width: 123px;
+    width: 21.1%;
 }
 
 .small-select {
@@ -94,23 +94,22 @@
 
 
 .avg-input {
-    width: 317px;
+    width: 55%;
     height: 20px;
 }
 
 .avg-select {
-    width: 308px;
+    width: 48.8%;
     height: 25px;
-    margin-left: -62px;
 }
 
 .large-input {
-    width: 497px;
+    width: 80.1%;
     height: 20px;
 }
 
 .large-select {
-    width: 503px;
+    width: 81%;
     height: 25px;
 }
 
@@ -118,30 +117,22 @@
     height: 40px;
 }
 
-#dtBirthday {
-    width: 123px;
-    height: 25px;
-}
-
 #slGender {
-    margin-left: -65px;
     border: 1px solid #d9d9d9;
-    width: 129px;
+    width: 23.6%;
     height: 25px;
 }
 
 #dtGivenDate {
-    margin-left: -65px;
-    height: 25px;
-}
-
-#txtDebitNumber {
-    width: 121px;
+    width: 23.6%;
 }
 
 #txtSalary {
-    width: 301px;
-    margin-left: -63px;
+    width: 48.8%;
+    height: 24px;
+    text-align: right;
+    -webkit-box-sizing: border-box;
+    padding-right: 44px;
 }
 
 .row input {
@@ -239,29 +230,30 @@
 .image-info {
     position: absolute;
     top: 43%;
-    right: 5%;
+    right: 4%;
 }
 
 .avatar-upload img {
     position: absolute;
     top: 13%;
-    right: 3%;
+    right: 2%;
     width: 150px;
     height: 150px;
 }
 
+.work-info .monetary-unit {
+    position: absolute;
+    top: 379px;
+    right: 2%;
+}
+
 .date {
-    text-align: center;
+    -webkit-box-sizing: border-box;
+    padding-left: 24px;
+    width: 22%;
+    height: 25px;
 }
 
-input[type=date]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    display: none;
-}
-
-
-
-input[type=date]::-webkit-calendar-picker-indicator {
-    -webkit-appearance: none;
-    display: none;
+.label-right {
+    width: 9.2% !important;
 }

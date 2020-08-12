@@ -300,7 +300,7 @@
                             <div class="upload-control">
                                 <label for="file-ava-image"><span class="choose-file">...</span></label>
                                 <button class="delete-avatar">&times;</button>
-                                <input type="file" id="file-ava-image" style="display:none" />
+                                <input tabindex="-1" type="file" id="file-ava-image" style="display:none" />
                             </div>
                         </div>
                         <div class="image-info">
@@ -361,13 +361,13 @@
 
             </div>
             <div class="dialog-footer">
+                <div class="footer-left">
+                    <button class="btn" id="btnHelp">Giúp</button>
+                </div>
                 <div class="footer-right">
                     <button class="btn" id="btnSave">Cất</button>
                     <button class="btn" id="btnSaveAdd">Cất & Thêm</button>
                     <button class="btn" id="btnClose">Đóng</button>
-                </div>
-                <div class="footer-left">
-                    <button class="btn" id="btnHelp">Giúp</button>
                 </div>
             </div>
         </div>

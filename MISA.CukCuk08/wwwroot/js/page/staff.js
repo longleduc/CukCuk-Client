@@ -74,6 +74,9 @@ class StaffJS {
 
         // Khi xóa ảnh
         $('.delete-avatar').on('click', this.deleteImage);
+
+        // Khi tab khỏi nút cuối cùng của dialog
+        //$('#frmDialogDetail').on("keydown", this.resetTab);
     }
 
     /**
@@ -315,28 +318,39 @@ class StaffJS {
     * CreatedBy: LDLONG (24/07/2020)
     * */
     rowOnClick() {
+        // Nếu đang giữ phím Ctrl
         if (event.ctrlKey) {
+            // Thêm hoặc xóa class row-selected
             this.classList.toggle("row-selected");
-            $('#btnEdit').prop('disabled', true);
-            $('#btnDuplicate').prop('disabled', true);
+
             if (this.classList.contains("row-selected")) {
                 // Add phần tử vào list để xóa
                 listDeleteStaff.push($(this).data("id"));
             } else {
+                // Lấy ra phần tử có id vừa bỏ class row-selected
                 var tmp = listDeleteStaff.indexOf($(this).data("id"));
                 listDeleteStaff.splice(tmp, 1);
             }
-        } else {
+        } else { // Nếu ko giữ phím Ctrl
+            // Thêm hoặc xóa class row-selected
             this.classList.toggle("row-selected");
             $(this).siblings().removeClass("row-selected");
-            $('#btnEdit').prop('disabled', false);
-            $('#btnDuplicate').prop('disabled', false);
+
             // Khi ko ấn bằng Ctrl => Reset list chứa phần tử để xóa
             listDeleteStaff = [];
+
             if (this.classList.contains("row-selected")) {
                 // Add phần tử vào list để xóa
                 listDeleteStaff.push($(this).data("id"));
             }
+        }
+        // Nếu có nhiều hơn 1 row được chọn => ko thể sửa hoặc nhân bản
+        if ($('.row-selected').length > 1) {
+            $('#btnEdit').prop('disabled', true);
+            $('#btnDuplicate').prop('disabled', true);
+        } else {
+            $('#btnEdit').prop('disabled', false);
+            $('#btnDuplicate').prop('disabled', false);
         }
     }
 
@@ -525,7 +539,7 @@ class StaffJS {
             $('#slStatus').val("");
             var imageUrl = "/content/images/avatardefault.png";
             $(".ava-img").attr("src", imageUrl);
-            $(".ava-img").css("visibility", "visible");
+            //$(".ava-img").css("visibility", "visible");
             $("#file-ava-image").val("");
         } catch (e) {
             console.log(e);
@@ -727,7 +741,7 @@ class StaffJS {
         fileReader.onload = function (event) {
             var imageUrl = event.target.result;
             $(".ava-img").attr("src", imageUrl);
-            $(".ava-img").css("visibility", "visible");
+            //$(".ava-img").css("visibility", "visible");
         };
         fileReader.readAsDataURL(file);
     }
@@ -741,6 +755,23 @@ class StaffJS {
         avaLink = null;
         $('#file-ava-image').val(null);
         $(".ava-img").attr("src", imageUrl);
-        $(".ava-img").css("visibility", "visible");
+        //$(".ava-img").css("visibility", "visible");
     }
+
+    /**
+     * Sự kiện reset lại tab khi hết diaform
+     * CreatedBy: LDLONG (12/8/2020)
+     * */
+    //resetTab(e) {
+
+    //    if ($(document.activeElement).attr("id") == "btnClose") {
+    //        if (e.which === 9) {
+    //            $(".dialog").focus();
+    //            $('#txtStaffCode').focus();
+    //        }
+    //    } else {
+    //        e.preventDefault();
+    //    }
+
+    //}
 }

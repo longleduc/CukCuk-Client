@@ -57,20 +57,20 @@ class StaffJS {
         $('.btnEndPage').on('click', this.btnEndPageOnClick.bind(this));
         $('.btnReload').on('click', this.btnFirstPageOnClick.bind(this));
 
-        // Khi ấn nút Yes trên warning-box
+        // Khi ấn nút Yes trên warning-box => xóa nhân viên
         $('#btn-yes-warning').on('click', Enum.FormMode.Delete, this.deleteStaff.bind(this));
 
-        // Khi ấn nút No trên warning-box
+        // Khi ấn nút No trên warning-box => ko xóa nhân viên
         $('#btn-close-warning').on('click', 0, this.notDeleteStaff);
 
         // Khi ấn nút Yes trên confirm-dialog
-        $('#btn-yes-confirm').on('click', this.btnYesConfirmOnClick);
+        $('#btn-yes-confirm').on('click', this.btnYesConfirmOnClick.bind(this));
 
         // Khi ấn nút Yes trên confirm-dialog
         $('#btn-close-confirm').on('click', this.btnNoConfirmOnClick);
 
         // Khi uploaded ảnh
-        $('#fileUpload').on('change', this.showImageFromInput);
+        $('#file-ava-image').on('change', this.showImageFromInput);
 
         // Khi xóa ảnh
         $('.delete-avatar').on('click', this.deleteImage);
@@ -164,16 +164,12 @@ class StaffJS {
     deleteStaff(sender) {
         try {
             var staffJS = this;
-
             // Đóng cửa số warning-box
             $('#warning-box').hide();
-
             //action = hành động xóa
             action = sender.data;
             // Nếu tìm thấy row có class là row-selected
             if ($('.row-selected').length !== 0) {
-                // Lấy ra ID của hàng đang được chọn
-                //var staffId = $('.row-selected').data('id')
                 // Call API DELETE với ID ở trên
                 $.ajax({
                     url: "/api/v1/staffs",
@@ -272,6 +268,10 @@ class StaffJS {
         }
     }
 
+    /**
+     * Sự kiện khi ấn phím yes trong confirm dialog
+     * CreatedBy: LDLONG (12/8/2020)
+     * */
     btnYesConfirmOnClick() {
         // Reset action
         action = 0;
@@ -283,6 +283,10 @@ class StaffJS {
         this.resetDialog();
     }
 
+    /**
+     * Sự kiện khi ấn phím no trong confirm dialog
+     * CreatedBy: LDLONG (12/8/2020)
+     * */
     btnNoConfirmOnClick() {
         // Đóng thông báo confirm
         $('#confirm-dialog').hide();
@@ -522,7 +526,7 @@ class StaffJS {
             var imageUrl = "/content/images/avatardefault.png";
             $(".ava-img").attr("src", imageUrl);
             $(".ava-img").css("visibility", "visible");
-            $("#fileUpload").val("");
+            $("#file-ava-image").val("");
         } catch (e) {
             console.log(e);
         }
@@ -682,7 +686,7 @@ class StaffJS {
         try {
             var staffJS = this;
             // Lấy ra object chứa file ảnh
-            var image = $("#fileUpload").get(0).files;
+            var image = $("#file-ava-image").get(0).files;
             if (image.length > 0) {
                 // Khởi tạo formData để chứa ảnh
                 var formData = new FormData();
@@ -735,7 +739,7 @@ class StaffJS {
     deleteImage() {
         var imageUrl = "/content/images/avatardefault.png";
         avaLink = null;
-        $('#fileUpload').val(null);
+        $('#file-ava-image').val(null);
         $(".ava-img").attr("src", imageUrl);
         $(".ava-img").css("visibility", "visible");
     }

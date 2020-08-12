@@ -207,7 +207,6 @@ namespace MISA.CukCuk08.Controllers
             await _context.SaveChangesAsync();
 
             return Ok( new { Result= "Success", staff } );
-            //return CreatedAtAction("GetStaff", new { id = staff.StaffId }, staff);
         }
 
        

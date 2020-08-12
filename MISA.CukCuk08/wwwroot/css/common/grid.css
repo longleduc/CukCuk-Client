@@ -48,7 +48,7 @@ table {
     }
 
     .search-input {
-        width: 100%;
+        width: 80%;
         border-color: #ccc;
         min-width: 6.5rem;
     }

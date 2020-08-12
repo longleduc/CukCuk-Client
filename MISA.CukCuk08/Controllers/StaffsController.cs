@@ -21,6 +21,10 @@ namespace MISA.CukCuk08.Controllers
             _context = context;
         }
 
+        /// <summary>
+        /// API GET gửi về tất cả object staff
+        /// </summary>
+        /// <returns></returns>
         // GET: api/Staffs
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Staff>>> GetStaff()
@@ -28,6 +32,11 @@ namespace MISA.CukCuk08.Controllers
             return await _context.Staff.OrderBy(s => s.StaffCode).ToListAsync();
         }
 
+        /// <summary>
+        /// API GET lấy về 1 object có ID được gửi lên
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: api/Staffs/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Staff>> GetStaff(Guid? id)
@@ -43,7 +52,7 @@ namespace MISA.CukCuk08.Controllers
         }
 
         /// <summary>
-        /// Hàm để tìm kiếm theo 1 trường trong DB
+        /// API GET để tìm kiếm 1 trường trong của object bằng filter
         /// </summary>
         /// <param name="key"></param>
         /// <param name="filter"></param>
@@ -139,16 +148,16 @@ namespace MISA.CukCuk08.Controllers
                         }
                     }
                     break;
-                //case 9:
-                //    // Tìm theo Status
-                //    foreach (var item in Staff)
-                //    {
-                //        if (item.Status.Contains(filter))
-                //        {
-                //            res.Add(item);
-                //        }
-                //    }
-                //    break;
+                    //case 9:
+                    //    // Tìm theo Status
+                    //    foreach (var item in Staff)
+                    //    {
+                    //        if (item.Status.Contains(filter))
+                    //        {
+                    //            res.Add(item);
+                    //        }
+                    //    }
+                    //    break;
             }
 
             if (res == null)
@@ -159,11 +168,17 @@ namespace MISA.CukCuk08.Controllers
             return res;
         }
 
+        /// <summary>
+        /// API PUT gửi về 1 object staff
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="staff"></param>
+        /// <returns></returns>
         // PUT: api/Staffs/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStaff(Guid? id,[FromBody] Staff staff)
+        public async Task<IActionResult> PutStaff(Guid? id, [FromBody] Staff staff)
         {
             if (id != staff.StaffId)
             {
@@ -191,6 +206,11 @@ namespace MISA.CukCuk08.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// API POST gửi object staff lên và có kèm check trùng mã nhân viên
+        /// </summary>
+        /// <param name="staff"></param>
+        /// <returns></returns>
         // POST: api/Staffs
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -200,17 +220,20 @@ namespace MISA.CukCuk08.Controllers
             Staff existStaff = _context.Staff.Where(s => s.StaffCode == staff.StaffCode).FirstOrDefault();
             if (existStaff != null)
             {
-                return Ok( new { Result= "Fail", existStaff } );
+                return Ok(new { Result = "Fail", existStaff });
             }
             staff.StaffId = Guid.NewGuid();
             _context.Staff.Add(staff);
             await _context.SaveChangesAsync();
 
-            return Ok( new { Result= "Success", staff } );
+            return Ok(new { Result = "Success", staff });
         }
 
-       
-
+        /// <summary>
+        /// API POST để gửi file được đính kèm về thư mục "wwwroot\\content\\images\\uploaded"
+        /// </summary>
+        /// <param name="formFile"></param>
+        /// <returns></returns>
         // POST: api/Customers
         [HttpPost("uploadimg")]
         public async Task<ActionResult<String>> PostFile(IFormFile formFile)
@@ -243,6 +266,11 @@ namespace MISA.CukCuk08.Controllers
         //    return staff;
         //}
 
+        /// <summary>
+        /// API DELETE xóa nhiều phần tử có ID được gửi về trong List
+        /// </summary>
+        /// <param name="IdList"></param>
+        /// <returns></returns>
         // DELETE: api/Staffs/5
         [HttpDelete]
         public async Task<ActionResult<Staff>> DeleteStaff([FromBody] List<Guid> IdList)
@@ -265,6 +293,11 @@ namespace MISA.CukCuk08.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Hàm kiểm tra xem có object nào có id gửi lên ko
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool StaffExists(Guid? id)
         {
             return _context.Staff.Any(e => e.StaffId == id);

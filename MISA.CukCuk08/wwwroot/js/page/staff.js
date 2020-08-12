@@ -85,14 +85,18 @@ class StaffJS {
      * CreatedBy: LDLONG (24/7/2020)
      */
     btnAddOnClick(sender) {
-        //action = hành động ADD
-        action = sender.data;
-        //Show dialog
-        $("#frmDialogDetail").show();
-        // Focus vào ô input đầu tiên của dialog
-        $('#txtStaffCode').focus();
-        // Mã nhân viên = mã nhân viên lớn nhất hiện tại + 1
-        $('#txtStaffCode').val(commonJS.formatCode(maxCode));
+        try {
+            //action = hành động ADD
+            action = sender.data;
+            //Show dialog
+            $("#frmDialogDetail").show();
+            // Focus vào ô input đầu tiên của dialog
+            $('#txtStaffCode').focus();
+            // Mã nhân viên = mã nhân viên lớn nhất hiện tại + 1
+            $('#txtStaffCode').val(commonJS.formatCode(maxCode));
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
@@ -276,14 +280,18 @@ class StaffJS {
      * CreatedBy: LDLONG (12/8/2020)
      * */
     btnYesConfirmOnClick() {
-        // Reset action
-        action = 0;
-        // Đóng thông báo confirm
-        $('#confirm-dialog').hide();
-        // Hide dialog
-        $("#frmDialogDetail").hide();
-        // Reset lại dialog chuẩn bị cho lần nhập sau
-        this.resetDialog();
+        try {
+            // Reset action
+            action = 0;
+            // Đóng thông báo confirm
+            $('#confirm-dialog').hide();
+            // Hide dialog
+            $("#frmDialogDetail").hide();
+            // Reset lại dialog chuẩn bị cho lần nhập sau
+            this.resetDialog();
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
@@ -318,39 +326,43 @@ class StaffJS {
     * CreatedBy: LDLONG (24/07/2020)
     * */
     rowOnClick() {
-        // Nếu đang giữ phím Ctrl
-        if (event.ctrlKey) {
-            // Thêm hoặc xóa class row-selected
-            this.classList.toggle("row-selected");
+        try {
+            // Nếu đang giữ phím Ctrl
+            if (event.ctrlKey) {
+                // Thêm hoặc xóa class row-selected
+                this.classList.toggle("row-selected");
 
-            if (this.classList.contains("row-selected")) {
-                // Add phần tử vào list để xóa
-                listDeleteStaff.push($(this).data("id"));
+                if (this.classList.contains("row-selected")) {
+                    // Add phần tử vào list để xóa
+                    listDeleteStaff.push($(this).data("id"));
+                } else {
+                    // Lấy ra phần tử có id vừa bỏ class row-selected
+                    var tmp = listDeleteStaff.indexOf($(this).data("id"));
+                    listDeleteStaff.splice(tmp, 1);
+                }
+            } else { // Nếu ko giữ phím Ctrl
+                // Thêm hoặc xóa class row-selected
+                this.classList.toggle("row-selected");
+                $(this).siblings().removeClass("row-selected");
+
+                // Khi ko ấn bằng Ctrl => Reset list chứa phần tử để xóa
+                listDeleteStaff = [];
+
+                if (this.classList.contains("row-selected")) {
+                    // Add phần tử vào list để xóa
+                    listDeleteStaff.push($(this).data("id"));
+                }
+            }
+            // Nếu có nhiều hơn 1 row được chọn => ko thể sửa hoặc nhân bản
+            if ($('.row-selected').length > 1) {
+                $('#btnEdit').prop('disabled', true);
+                $('#btnDuplicate').prop('disabled', true);
             } else {
-                // Lấy ra phần tử có id vừa bỏ class row-selected
-                var tmp = listDeleteStaff.indexOf($(this).data("id"));
-                listDeleteStaff.splice(tmp, 1);
+                $('#btnEdit').prop('disabled', false);
+                $('#btnDuplicate').prop('disabled', false);
             }
-        } else { // Nếu ko giữ phím Ctrl
-            // Thêm hoặc xóa class row-selected
-            this.classList.toggle("row-selected");
-            $(this).siblings().removeClass("row-selected");
-
-            // Khi ko ấn bằng Ctrl => Reset list chứa phần tử để xóa
-            listDeleteStaff = [];
-
-            if (this.classList.contains("row-selected")) {
-                // Add phần tử vào list để xóa
-                listDeleteStaff.push($(this).data("id"));
-            }
-        }
-        // Nếu có nhiều hơn 1 row được chọn => ko thể sửa hoặc nhân bản
-        if ($('.row-selected').length > 1) {
-            $('#btnEdit').prop('disabled', true);
-            $('#btnDuplicate').prop('disabled', true);
-        } else {
-            $('#btnEdit').prop('disabled', false);
-            $('#btnDuplicate').prop('disabled', false);
+        } catch (e) {
+            console.log(e);
         }
     }
 
@@ -508,8 +520,12 @@ class StaffJS {
      * CreatedBy: LDLONG (3/8/2020)
      * */
     saveAndAddData() {
-        this.saveFile();
-        $("#frmDialogDetail").show();
+        try {
+            this.saveFile();
+            $("#frmDialogDetail").show();
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
@@ -649,9 +665,13 @@ class StaffJS {
      * CreatedBy: LDLONG (06/08/2020)
      * */
     btnFirstPageOnClick() {
-        if ($('#page-number').val() == 1) return;
-        $('#page-number').val(1);
-        this.loadData();
+        try {
+            if ($('#page-number').val() == 1) return;
+            $('#page-number').val(1);
+            this.loadData();
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
@@ -659,11 +679,15 @@ class StaffJS {
      * CreatedBy: LDLONG (06/08/2020)
      * */
     btnPrePageOnClick() {
-        var PageNumberNow = parseInt($('#page-number').val());
-        if (PageNumberNow > 1) {
-            $('#page-number').val(PageNumberNow - 1);
-        } else return;
-        this.loadData();
+        try {
+            var PageNumberNow = parseInt($('#page-number').val());
+            if (PageNumberNow > 1) {
+                $('#page-number').val(PageNumberNow - 1);
+            } else return;
+            this.loadData();
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
@@ -671,13 +695,17 @@ class StaffJS {
      * CreatedBy: LDLONG (06/08/2020)
      * */
     btnNextPageOnClick() {
-        var PageNumberNow = parseInt($('#page-number').val());
-        var totalPage = parseInt(allRow / $('#select-num-row').val());
-        if (allRow % $('#select-num-row').val() !== 0) totalPage += 1;
-        if (PageNumberNow < totalPage) {
-            $('#page-number').val(PageNumberNow + 1);
-        } else return;
-        this.loadData();
+        try {
+            var PageNumberNow = parseInt($('#page-number').val());
+            var totalPage = parseInt(allRow / $('#select-num-row').val());
+            if (allRow % $('#select-num-row').val() !== 0) totalPage += 1;
+            if (PageNumberNow < totalPage) {
+                $('#page-number').val(PageNumberNow + 1);
+            } else return;
+            this.loadData();
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
@@ -685,11 +713,16 @@ class StaffJS {
      * CreatedBy: LDLONG (06/08/2020)
      * */
     btnEndPageOnClick() {
-        var totalPage = parseInt(allRow / $('#select-num-row').val());
-        if (allRow % $('#select-num-row').val() !== 0) totalPage += 1;
-        if ($('#page-number').val() == totalPage) return;
-        $('#page-number').val(totalPage);
-        this.loadData();
+        try {
+            var totalPage = parseInt(allRow / $('#select-num-row').val());
+            if (allRow % $('#select-num-row').val() !== 0) totalPage += 1;
+            if ($('#page-number').val() == totalPage) return;
+            $('#page-number').val(totalPage);
+            this.loadData();
+        } catch (e) {
+            console.log(e);
+        }
+
     }
 
     /**
@@ -736,14 +769,18 @@ class StaffJS {
      * CreatedBy: LDLONG (07/08/2020)
      * */
     showImageFromInput() {
-        var file = $(this)[0].files[0];
-        var fileReader = new FileReader();
-        fileReader.onload = function (event) {
-            var imageUrl = event.target.result;
-            $(".ava-img").attr("src", imageUrl);
-            //$(".ava-img").css("visibility", "visible");
-        };
-        fileReader.readAsDataURL(file);
+        try {
+            var file = $(this)[0].files[0];
+            var fileReader = new FileReader();
+            fileReader.onload = function (event) {
+                var imageUrl = event.target.result;
+                $(".ava-img").attr("src", imageUrl);
+                //$(".ava-img").css("visibility", "visible");
+            };
+            fileReader.readAsDataURL(file);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**
@@ -751,11 +788,15 @@ class StaffJS {
      * CreatedBy: LDLONG (10/08/2020)
      * */
     deleteImage() {
-        var imageUrl = "/content/images/avatardefault.png";
-        avaLink = null;
-        $('#file-ava-image').val(null);
-        $(".ava-img").attr("src", imageUrl);
-        //$(".ava-img").css("visibility", "visible");
+        try {
+            var imageUrl = "/content/images/avatardefault.png";
+            avaLink = null;
+            $('#file-ava-image').val(null);
+            $(".ava-img").attr("src", imageUrl);
+            //$(".ava-img").css("visibility", "visible");
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     /**

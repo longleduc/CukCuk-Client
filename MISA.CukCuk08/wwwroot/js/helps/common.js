@@ -27,6 +27,7 @@ var commonJS = {
     /**
      * Hàm định dạng ngày hiển thị (dd/MM/yyyy)
      * @param {any} date
+     * CreatedBy: LDLONG (24/7/2020)
      */
     formatDate(date) {
         var day = date.getDate();
@@ -52,8 +53,8 @@ var commonJS = {
     },
     /**
      * Hàm trả về mã nhân viên lớn nhất + 1
-     * CreatedBy: LDLONG(10/8/2020)
      * @param {any} maxCode
+     * CreatedBy: LDLONG(10/8/2020)
      */
     formatCode(maxCode) {
         var tmp = (parseInt(maxCode.substr(2, 5)) + 1).toString();
@@ -64,8 +65,8 @@ var commonJS = {
     },
     /**
      * Hàm trả về tiền dưới dạng string để gửi dữ liệu DB
-     * CreatedBy: LDLONG(10/8/2020)
      * @param {any} money
+     * CreatedBy: LDLONG(10/8/2020)
      */
     formatMoneyToBind(money) {
         return money.replace(/[.]/g, "");
@@ -73,8 +74,8 @@ var commonJS = {
 
     /**
      * Hàm trả về link ảnh có thể bind được để hiển thị
-     * CreatedBy: LDLONG(10/8/2020)
      * @param {any} imageLink
+     * CreatedBy: LDLONG(10/8/2020)
      */
     formatImageLink(imageLink) {
         if (!imageLink) return "/content/images/avatardefault.png";
@@ -85,8 +86,8 @@ var commonJS = {
 
     /**
      * Hàm chuyển null về rỗng để hiện thị 
-     * CreatedBy: LDLONG(11/8/2020)
      * @param {any} staff
+     * CreatedBy: LDLONG(11/8/2020)
      */
     changeNull(staff) {
         if (staff['Gender'] == null) staff['Gender'] = "";
@@ -99,8 +100,8 @@ var commonJS = {
 
     /**
      * Hàm render dữ liệu ra table
-     * CreatedBy: LDLONG(11/8/2020)
      * @param {any} staff
+     * CreatedBy: LDLONG(11/8/2020)
      */
     renderData(staff) {
         // Số row trên 1 page
@@ -148,8 +149,8 @@ var commonJS = {
 
     /**
      * Hàm bind data của 1 object staff vào Form
-     * CreatedBy: LDLONG(11/8/2020)
      * @param {any} res
+     * CreatedBy: LDLONG(11/8/2020)
      */
     bindDataToForm (res) {
         $('#txtStaffCode').val(res['StaffCode']);
